@@ -24,6 +24,7 @@ import MailIcon from '@mui/icons-material/Mail';
 // Other vital visual components.
 import Header from "./general_components/Header"
 import Menu from "./general_components/Menu";
+import Layout from "./general_components/Layout"
 
 // MaterialUI
 import { Container, Grid, Card, CardContent, CardMedia, Typography as MuiTypography } from '@mui/material';
@@ -165,85 +166,11 @@ const ProductGrid: React.FC = () => {
 };
 
 const Lobby: React.FC = () => {
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(true);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
-    return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Header />
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <p>{text}</p>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
-                                </ListItemIcon>
-                                <p>{text}</p>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            <Main open={open}>
-                <DrawerHeader />
-                <ProductGrid />
-            </Main>
-        </Box>
-    );
+    return (<>
+        <Layout>
+            <ProductGrid />
+        </Layout>
+    </>)
 };
 
 export default Lobby;
