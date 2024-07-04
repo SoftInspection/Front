@@ -1,13 +1,35 @@
 import React from 'react';
 
-// Other visual components.
+// MaterialUI
+import { styled, useTheme } from '@mui/material/styles';
+import { Drawer } from "@mui/material";
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+
+// Other vital visual components.
+import Header from "./general_components/Header"
 import Menu from "./general_components/Menu";
 
 // MaterialUI
-import { Container, Grid, Card, CardContent, CardMedia, Typography, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Drawer, AppBar, Toolbar } from '@mui/material';
-import { Inbox as InboxIcon, Drafts as DraftsIcon, MoveToInbox as MoveToInboxIcon, Mail as MailIcon } from '@mui/icons-material';
-
+import { Container, Grid, Card, CardContent, CardMedia, Typography as MuiTypography } from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
+
+const drawerWidth = 240;
 
 const PRODUCTS = [
     {
@@ -23,7 +45,7 @@ const PRODUCTS = [
         id: 2,
         name: 'Бот 1',
         price: 799.99,
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedита modi animi sunt rerum iure!",
         category: 'Бот',
         stock: 15,
         image: '?'
@@ -41,7 +63,7 @@ const PRODUCTS = [
         id: 4,
         name: 'Бот 2',
         price: 199.99,
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam долorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         stock: 30,
         image: '?'
@@ -57,6 +79,55 @@ const PRODUCTS = [
     }
 ];
 
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+    open?: boolean;
+}>(({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+    }),
+}));
+
+interface AppBarProps extends MuiAppBarProps {
+    open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+    transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: `${drawerWidth}px`,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    }),
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+}));
+
 const ProductGrid: React.FC = () => {
     return (
         <Grid container spacing={4}>
@@ -70,21 +141,21 @@ const ProductGrid: React.FC = () => {
                             alt={product.name}
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
+                            <MuiTypography gutterBottom variant="h5" component="div">
                                 {product.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            </MuiTypography>
+                            <MuiTypography variant="body2" color="text.secondary">
                                 {product.description}
-                            </Typography>
-                            <Typography variant="body2" color="text.primary">
+                            </MuiTypography>
+                            <MuiTypography variant="body2" color="text.primary">
                                 Цена: ${product.price}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            </MuiTypography>
+                            <MuiTypography variant="body2" color="text.secondary">
                                 Категория: {product.category}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            </MuiTypography>
+                            <MuiTypography variant="body2" color="text.secondary">
                                 В наличии: {product.stock}
-                            </Typography>
+                            </MuiTypography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -93,70 +164,85 @@ const ProductGrid: React.FC = () => {
     );
 };
 
-
 const Lobby: React.FC = () => {
-    const drawerWidth = 250;
+    const theme = useTheme();
+    const [open, setOpen] = React.useState(true);
+
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
     return (
-        <>
-            return (
-            <Box sx={{ display: 'flex' }}>
-                <AppBar
-                    position="fixed"
-                    sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-                >
-                </AppBar>
-                <Drawer
-                    sx={{
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar position="fixed" open={open}>
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Header />
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
                         width: drawerWidth,
-                        flexShrink: 0,
-                        '& .MuiDrawer-paper': {
-                            width: drawerWidth,
-                            boxSizing: 'border-box',
-                        },
-                    }}
-                    variant="permanent"
-                    anchor="left"
-                >
-                    <Toolbar />
-                    <h1>Sub2Soft</h1>
-                    <Divider />
-                    <List>
-                        {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                    <Divider />
-                    <List>
-                        {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
-                </Drawer>
-                <Box
-                    component="main"
-                    sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-                >
-                    <Toolbar />
-                    <ProductGrid />
-                </Box>
-            </Box>
-            );
-        </>
+                        boxSizing: 'border-box',
+                    },
+                }}
+                variant="persistent"
+                anchor="left"
+                open={open}
+            >
+                <DrawerHeader>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <List>
+                    {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
+                                </ListItemIcon>
+                                <p>{text}</p>
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
+                        <ListItem key={text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
+                                </ListItemIcon>
+                                <p>{text}</p>
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
+            <Main open={open}>
+                <DrawerHeader />
+                <ProductGrid />
+            </Main>
+        </Box>
     );
 };
 
