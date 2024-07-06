@@ -2,7 +2,6 @@ import React from 'react';
 
 // MaterialUI
 import { styled, useTheme } from '@mui/material/styles';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Layout from "./general_components/Layout"
 import { Container, Grid, Card, CardContent, CardMedia, Typography as MuiTypography } from '@mui/material';
 

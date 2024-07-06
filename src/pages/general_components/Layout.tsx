@@ -1,15 +1,7 @@
 import React, { ReactNode } from 'react';
-
-// MaterialUI
-import { styled, useTheme } from '@mui/material/styles';
-import { Drawer } from "@mui/material";
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
+import { styled, ThemeProvider, useTheme } from '@mui/material/styles';
+import { Drawer, CssBaseline, Box, Toolbar, List, Divider, IconButton } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -20,8 +12,8 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import KeyIcon from '@mui/icons-material/Key';
 
-// Other vital visual components.
-import Header from "./Header"
+import Header from "./Header";
+import darkTheme from './Styles/LayoutTheme';
 
 const drawerWidth = 240;
 
@@ -42,6 +34,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
         }),
         marginLeft: 0,
     }),
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
 }));
 
 interface AppBarProps extends MuiAppBarProps {
@@ -55,6 +49,8 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
     ...(open && {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
@@ -69,9 +65,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
 }));
 
 interface LayoutProps {
@@ -91,72 +88,78 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
+        <>
+            <ThemeProvider theme={darkTheme}>
+                <Box sx={{ display: 'flex' }}>
+                    <CssBaseline />
+                    <AppBar position="fixed" open={open}>
+                        <Toolbar>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                edge="start"
+                                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Header />
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer
+                        sx={{
+                            width: drawerWidth,
+                            flexShrink: 0,
+                            '& .MuiDrawer-paper': {
+                                width: drawerWidth,
+                                boxSizing: 'border-box',
+                                backgroundColor: theme.palette.background.paper,
+                                color: theme.palette.text.primary,
+                            },
+                        }}
+                        variant="persistent"
+                        anchor="left"
+                        open={open}
                     >
-                        <MenuIcon />
-                    </IconButton>
-                    <Header />
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <p>{text}</p>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
-                                </ListItemIcon>
-                                <p>{text}</p>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-            <Main open={open}>
-                <DrawerHeader />
-                {children}
-            </Main>
-        </Box>
+                        <DrawerHeader>
+                            <IconButton onClick={handleDrawerClose}>
+                                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                            </IconButton>
+                        </DrawerHeader>
+                        <Divider sx={{ backgroundColor: theme.palette.divider }} />
+                        <List>
+                            {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
+                                <ListItem key={text} disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon sx={{ color: theme.palette.text.primary }}>
+                                            {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
+                                        </ListItemIcon>
+                                        <p>{text}</p>
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                        <Divider sx={{ backgroundColor: theme.palette.divider }} />
+                        <List>
+                            {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
+                                <ListItem key={text} disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon sx={{ color: theme.palette.text.primary }}>
+                                            {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
+                                        </ListItemIcon>
+                                        <p>{text}</p>
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Drawer>
+                    <Main open={open}>
+                        <DrawerHeader />
+                        {children}
+                    </Main>
+                </Box>
+            </ThemeProvider>
+        </>
     );
 };
 
