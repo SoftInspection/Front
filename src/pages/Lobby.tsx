@@ -23,7 +23,7 @@ const PRODUCTS = [
         id: 2,
         name: 'Бот 1',
         price: 799.99,
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedита modi animi sunt rerum iure!",
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         stock: 15,
         image: '?'
@@ -52,9 +52,9 @@ const PRODUCTS = [
         price: 49.99,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
-        stock: 40,
+        stock: 10,
         image: '?'
-    }
+    },
 ];
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
@@ -76,6 +76,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
     }),
 }));
 
+const truncateDescription = (description: string, maxLength: number) => {
+    return description.length > maxLength ? description.slice(0, maxLength) + '...' : description;
+}
 
 const ProductGrid: React.FC = () => {
     return (
@@ -94,7 +97,7 @@ const ProductGrid: React.FC = () => {
                                 {product.name}
                             </MuiTypography>
                             <MuiTypography variant="body2" color="text.secondary">
-                                {product.description}
+                                {truncateDescription(product.description, 20)}
                             </MuiTypography>
                             <MuiTypography variant="body2" color="text.primary">
                                 Цена: ${product.price}

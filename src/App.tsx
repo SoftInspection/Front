@@ -6,12 +6,16 @@ import CheckAPI from "./pages/CheckAPI"
 import './App.css';
 
 function App() {
+  //! ADMINISTRATOR STATUS.
+  const isAdmin = true;
+  //! --------------------
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Lobby />} />
-          <Route path="/api" element={<CheckAPI />} />
+          <Route path="/api" element={<CheckAPI isAdmin={isAdmin} />} />
           <Route path="*" element={<UndefinedAddress />} />
         </Routes>
       </BrowserRouter >

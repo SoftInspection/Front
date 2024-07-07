@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import KeyIcon from '@mui/icons-material/Key';
+import { Link } from 'react-router-dom';
 
 import Header from "./Header";
 import darkTheme from './Styles/LayoutTheme';
@@ -49,8 +50,6 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: theme.palette.background.paper,
-    color: theme.palette.text.primary,
     ...(open && {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
@@ -67,8 +66,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
-    backgroundColor: theme.palette.background.paper,
-    color: theme.palette.text.primary,
 }));
 
 interface LayoutProps {
@@ -99,7 +96,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 aria-label="open drawer"
                                 onClick={handleDrawerOpen}
                                 edge="start"
-                                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                                sx={{ marginRight: 5, ...(open && { display: 'none' }) }}
                             >
                                 <MenuIcon />
                             </IconButton>
@@ -128,26 +125,35 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         </DrawerHeader>
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
-                            {['Программное обеспечение', 'Боты', 'Специальные ключи', 'API'].map((text, index) => (
-                                <ListItem key={text} disablePadding>
-                                    <ListItemButton>
+                            {[
+                                { text: 'Программное обеспечение', link: '/software' },
+                                { text: 'Боты', link: '/bots' },
+                                { text: 'Специальные ключи', link: '/keys' },
+                                { text: 'API', link: '/api' },
+                            ].map((item, index) => (
+                                <ListItem key={item.text} disablePadding>
+                                    <ListItemButton component={Link} to={item.link}>
                                         <ListItemIcon sx={{ color: theme.palette.text.primary }}>
                                             {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
                                         </ListItemIcon>
-                                        <p>{text}</p>
+                                        <p>{item.text}</p>
                                     </ListItemButton>
                                 </ListItem>
                             ))}
                         </List>
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
-                            {['Избранное', 'Инструктаж', 'Feedback'].map((text, index) => (
-                                <ListItem key={text} disablePadding>
-                                    <ListItemButton>
+                            {[
+                                { text: 'Избранное', link: '/saved' },
+                                { text: 'Инструктаж', link: '/training' },
+                                { text: 'Feedback', link: '/feedback' },
+                            ].map((item, index) => (
+                                <ListItem key={item.text} disablePadding>
+                                    <ListItemButton component={Link} to={item.link}>
                                         <ListItemIcon sx={{ color: theme.palette.text.primary }}>
                                             {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
                                         </ListItemIcon>
-                                        <p>{text}</p>
+                                        <p>{item.text}</p>
                                     </ListItemButton>
                                 </ListItem>
                             ))}
