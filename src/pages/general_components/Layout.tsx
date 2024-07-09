@@ -150,8 +150,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
                             {[
-                                { text: 'Избранное', link: '/saved' },
-                                { text: 'Инструктаж', link: '/training' },
+                                { text: 'Сохранённое', link: '/saved' },
+                                { text: 'Инструктажа', link: '/training' },
                                 { text: 'Feedback', link: '/feedback' },
                             ].map((item, index) => (
                                 <ListItem key={item.text} disablePadding>
