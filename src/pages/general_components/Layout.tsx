@@ -131,6 +131,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
                             {[
+                                { text: "Главная", link: "/" },
                                 { text: 'Программное обеспечение', link: '/software' },
                                 { text: 'Боты', link: '/bots' },
                                 { text: 'Специальные ключи', link: '/keys' },
