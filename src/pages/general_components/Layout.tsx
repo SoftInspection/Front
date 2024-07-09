@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import KeyIcon from '@mui/icons-material/Key';
+import Typography from "@mui/material/Typography";
 import { Link } from 'react-router-dom';
 
 import Header from "./Header";
@@ -110,8 +111,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             '& .MuiDrawer-paper': {
                                 width: drawerWidth,
                                 boxSizing: 'border-box',
-                                backgroundColor: theme.palette.background.paper,
-                                color: theme.palette.text.primary,
+                                // backgroundColor: theme.palette.background.paper,
+                                backgroundColor: "#343434",
+                                // color: theme.palette.text.primary,
+                                color: "white"
                             },
                         }}
                         variant="persistent"
@@ -119,8 +122,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         open={open}
                     >
                         <DrawerHeader>
+                            {/* <Typography variant="h6">Sub2Soft</Typography> */}
                             <IconButton onClick={handleDrawerClose}>
                                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                                {/* <ChevronRightIcon /> */}
                             </IconButton>
                         </DrawerHeader>
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />

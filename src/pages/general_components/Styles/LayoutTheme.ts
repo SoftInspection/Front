@@ -10,12 +10,12 @@ const darkTheme = createTheme({
             main: '#f48fb1',
         },
         background: {
-            default: '#121212',
+            // default: '#121212',
             paper: '#1f1f1f',
         },
         text: {
             primary: '#e0e0e0',
-            secondary: '#b0b0b0',
+            secondary: '#b0b0b0'
         },
     },
 });
