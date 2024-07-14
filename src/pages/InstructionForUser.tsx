@@ -226,6 +226,10 @@ const InstructionForUser: React.FC = () => {
     return (
         <Layout>
             <Box sx={{ width: '100%' }}>
+                <Typography variant="h4" gutterBottom>
+                    Как купить подписку?
+                </Typography>
+                <hr />
                 <Stepper activeStep={activeStep}>
                     {stepsForInstall.map((label, index) => {
                         const stepProps: { completed?: boolean } = {};
@@ -274,6 +278,11 @@ const InstructionForUser: React.FC = () => {
                     </React.Fragment>
                 )}
             </Box>
+
+            <Typography variant="h4" gutterBottom>
+                Как опубликовать свой продукт?
+            </Typography>
+            <hr />
             {/* //! ------------------------------------------------------- */}
             <Box sx={{ flexGrow: 1, padding: 3 }}>
                 <Typography variant="h4" gutterBottom>
