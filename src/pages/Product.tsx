@@ -37,7 +37,7 @@ const Product: React.FC = () => {
 
     return (
         <Layout>
-            <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+            <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <Card>
                     <CardMedia
                         component="img"
