@@ -28,7 +28,7 @@ export const PRODUCTS: Product[] = [
         price: 799.99,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
-        stock: 0,
+        stock: 15,
         image: '?'
     },
     {
@@ -46,7 +46,7 @@ export const PRODUCTS: Product[] = [
         price: 199.99,
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
-        stock: 30,
+        stock: 0,
         image: '?'
     },
     {
