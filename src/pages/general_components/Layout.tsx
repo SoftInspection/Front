@@ -153,6 +153,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 { text: 'Сохранённое', link: '/saved' },
                                 { text: 'Инструктаж', link: '/instruction' },
                                 { text: 'Feedback', link: '/feedback' },
+                                { text: 'О нас', link: '/about' },
                             ].map((item, index) => (
                                 <ListItem key={item.text} disablePadding>
                                     <ListItemButton component={Link} to={item.link}>

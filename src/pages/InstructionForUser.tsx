@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Layout from './general_components/Layout';
+import Developers from "./Developers";
 import { Card, CardContent, CardMedia, Grid } from '@mui/material';
 
 const stepsForInstall = ['Выберите софт', 'Пополните токены', 'Купите подписку', 'Получите ключ', 'Воспользуйтесь ботом', 'Используйте ключ', 'Пользуйтесь'];
@@ -174,24 +175,6 @@ interface Developer {
     imageUrl: string;
 }
 
-const developers: Developer[] = [
-    {
-        name: 'Dilemma Fixer',
-        description: 'Ведущий разработчик backend.',
-        imageUrl: 'https://via.placeholder.com/150',
-    },
-    {
-        name: 'Suchhzz',
-        description: 'Разработчик backend.',
-        imageUrl: 'https://via.placeholder.com/150',
-    },
-    {
-        name: 'Ejtolf S. Dargqvist',
-        description: 'Ведущий разработчик frontend.',
-        imageUrl: 'https://via.placeholder.com/150',
-    }
-];
-
 const InstructionForUser: React.FC = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
@@ -278,39 +261,12 @@ const InstructionForUser: React.FC = () => {
                     </React.Fragment>
                 )}
             </Box>
-
-            <Typography variant="h4" gutterBottom>
-                Как опубликовать свой продукт?
-            </Typography>
             <hr />
             {/* //! ------------------------------------------------------- */}
-            <Box sx={{ flexGrow: 1, padding: 3 }}>
-                <Typography variant="h4" gutterBottom>
-                    Разработчики Sub2Soft
-                </Typography>
-                <Grid container spacing={3}>
-                    {developers.map((developer, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
-                            <Card>
-                                <CardMedia
-                                    component="img"
-                                    height="150"
-                                    image={developer.imageUrl}
-                                    alt={developer.name}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        {developer.name}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {developer.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+            <Typography variant="h4" gutterBottom>
+                Разработчики Sub2Soft
+            </Typography>
+            <Developers />
         </Layout>
     );
 }

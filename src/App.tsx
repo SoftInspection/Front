@@ -5,6 +5,7 @@ import Lobby from "./pages/Lobby";
 import UndefinedAddress from './pages/UndefinedAddress';
 import CheckAPI from "./pages/CheckAPI"
 import Product from "./pages/Product";
+import About from "./pages/About";
 
 import './App.css';
 import FeedbackPage from './pages/general_components/Feedback';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/api" element={<CheckAPI isAdmin={isAdmin} />} />
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/instruction" element={<InstructionForUser />} />
+          <Route path="/about" element={<About />} />
           <Route path="/item/:name" element={<Product />} />
           <Route path="*" element={<UndefinedAddress />} />
         </Routes>
