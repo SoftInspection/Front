@@ -5,6 +5,7 @@ interface Developer {
     name: string;
     description: string;
     imageUrl: string;
+    socials?: string[];
 }
 
 const developers: Developer[] = [
@@ -12,16 +13,19 @@ const developers: Developer[] = [
         name: 'Dilemma Fixer',
         description: 'Ведущий разработчик backend.',
         imageUrl: 'https://via.placeholder.com/150',
+        socials: ['https://github.com/dilemmafixer', 'https://linkedin/user/illashishko'], //! TO CHECK THEN
     },
     {
         name: 'Suchhzz',
         description: 'Разработчик backend.',
         imageUrl: 'https://via.placeholder.com/150',
+        socials: ['https://github.com/suchhzz']
     },
     {
         name: 'Ejtolf S. Dargqvist',
         description: 'Ведущий разработчик frontend.',
         imageUrl: 'https://via.placeholder.com/150',
+        socials: ['https://github.com/Ejtolf', 'https://linkedin/Ejtolf']
     }
 ];
 

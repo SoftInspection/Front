@@ -262,11 +262,6 @@ const InstructionForUser: React.FC = () => {
                 )}
             </Box>
             <hr />
-            {/* //! ------------------------------------------------------- */}
-            <Typography variant="h4" gutterBottom>
-                Разработчики Sub2Soft
-            </Typography>
-            <Developers />
         </Layout>
     );
 }

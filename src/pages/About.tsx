@@ -138,6 +138,20 @@ const About: React.FC = () => {
                 <hr />
                 <Box sx={{ my: 4 }}>
                     <Typography variant="h4" component="h2" gutterBottom>
+                        Используемые технологии:
+                    </Typography>
+                    <Typography variant="body1" paragraph>
+                        Frontend: HTML, React.JS, TypeScript, TSX, MaterialUI; IDE - Visual Studio Code, WebStorm.
+                    </Typography>
+                    <Typography variant="body1" paragraph>
+                        Backend: C#, .NET Framework; IDE - Visual Studio, Rider.
+                    </Typography>
+                    <Typography variant="body1" paragraph>
+                        Telegram-БОТ: Python, iogram: IDE - PyCharm.
+                    </Typography>
+                </Box>
+                <Box sx={{ my: 4 }}>
+                    <Typography variant="h4" component="h2" gutterBottom>
                         Контакты
                     </Typography>
                     <Typography variant="body1" paragraph>
