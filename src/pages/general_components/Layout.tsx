@@ -132,9 +132,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <List>
                             {[
                                 { text: "Главная", link: "/" },
-                                { text: 'Программное обеспечение', link: '/software' },
-                                { text: 'Боты', link: '/bots' },
-                                { text: 'Специальные ключи', link: '/keys' },
                                 { text: 'API', link: '/api' },
                             ].map((item, index) => (
                                 <ListItem key={item.text} disablePadding>
