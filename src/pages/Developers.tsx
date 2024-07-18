@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Grid, Typography, IconButton } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 interface Developer {
     name: string;
     description: string;
     imageUrl: string;
-    socials?: string[];
+    socials?: { platform: string, url: string }[];
 }
 
 const developers: Developer[] = [
@@ -13,19 +15,27 @@ const developers: Developer[] = [
         name: 'Dilemma Fixer',
         description: 'Ведущий разработчик backend.',
         imageUrl: 'https://via.placeholder.com/150',
-        socials: ['https://github.com/dilemmafixer', 'https://linkedin/user/illashishko'], //! TO CHECK THEN
+        socials: [
+            { platform: 'github', url: 'https://github.com/DilemaFixer' },
+            { platform: 'linkedin', url: 'https://www.linkedin.com/in/illa-shishko-088960251/' }
+        ]
     },
     {
         name: 'Suchhzz',
         description: 'Разработчик backend.',
         imageUrl: 'https://via.placeholder.com/150',
-        socials: ['https://github.com/suchhzz']
+        socials: [
+            { platform: 'github', url: 'https://github.com/suchhzz' }
+        ]
     },
     {
         name: 'Ejtolf S. Dargqvist',
         description: 'Ведущий разработчик frontend.',
         imageUrl: 'https://via.placeholder.com/150',
-        socials: ['https://github.com/Ejtolf', 'https://linkedin/Ejtolf']
+        socials: [
+            { platform: 'github', url: 'https://github.com/Ejtolf' },
+            { platform: 'linkedin', url: 'https://linkedin.com/in/Ejtolf' }
+        ]
     }
 ];
 
@@ -48,6 +58,21 @@ const Developers: React.FC = () => {
                             <Typography variant="body2" color="text.secondary">
                                 {developer.description}
                             </Typography>
+                            <div>
+                                {developer.socials?.map((social, idx) => (
+                                    <IconButton
+                                        key={idx}
+                                        component="a"
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={social.platform}
+                                    >
+                                        {social.platform === 'github' && <GitHubIcon />}
+                                        {social.platform === 'linkedin' && <LinkedInIcon />}
+                                    </IconButton>
+                                ))}
+                            </div>
                         </CardContent>
                     </Card>
                 </Grid>
