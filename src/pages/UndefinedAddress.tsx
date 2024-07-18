@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import Layout from "./general_components/Layout";
-import { Box, Typography, Button, Container } from "@mui/material";
+import { Box, Typography, Button, Container, CircularProgress } from "@mui/material";
 
 const UndefinedAddress: React.FC = () => {
+    const [loading, setLoading] = useState(false);
     const currentLocation = useLocation();
+
+    const handleReload = () => {
+        setLoading(true);
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000); // Delay just for demonstration.
+    };
 
     return (
         <Layout>
@@ -19,9 +27,18 @@ const UndefinedAddress: React.FC = () => {
                     {currentLocation.pathname}
                 </Typography>
                 <Box mt={4}>
-                    <Button variant="contained" color="primary">
-                        <Link to="/">Вернуться на главную</Link>
-                    </Button>
+                    {loading ? (
+                        <CircularProgress />
+                    ) : (
+                        <>
+                            <Button variant="contained" color="primary" onClick={handleReload} sx={{ mr: 2 }}>
+                                Перезагрузить
+                            </Button>
+                            <Button variant="contained" color="primary" component={Link} to="/">
+                                Вернуться на главную
+                            </Button>
+                        </>
+                    )}
                 </Box>
             </Container>
         </Layout>

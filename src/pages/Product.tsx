@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PRODUCTS } from './Lobby';
 import { Container, Typography as MuiTypography, Card, CardMedia, CardContent, CardActions, Button, Grid } from '@mui/material';
-// import Card from '@mui/joy/Card';
 import Layout from './general_components/Layout';
 
 interface ProductStruct {
@@ -19,6 +18,36 @@ const Product: React.FC = () => {
     const { name } = useParams<{ name: string }>();
     const product = PRODUCTS.find((p: ProductStruct) => p.name === name);
     const isAvailable = product?.stock !== 0;
+
+    const [isSaved, setIsSaved] = useState<boolean>(false);
+
+    useEffect(() => {
+        const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
+        if (product) {
+            const isProductSaved = savedProducts.some((savedProduct: ProductStruct) => savedProduct.id === product.id);
+            setIsSaved(isProductSaved);
+        }
+    }, [product]);
+
+    const handleAddToSaved = () => {
+        const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
+        if (product) {
+            savedProducts.push(product);
+            localStorage.setItem('savedProducts', JSON.stringify(savedProducts));
+            setIsSaved(true);
+            alert('Товар добавлен в сохранённое!');
+        }
+    };
+
+    const handleRemoveFromSaved = () => {
+        const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
+        if (product) {
+            const updatedSavedProducts = savedProducts.filter((savedProduct: ProductStruct) => savedProduct.id !== product.id);
+            localStorage.setItem('savedProducts', JSON.stringify(updatedSavedProducts));
+            setIsSaved(false);
+            alert('Товар удалён из сохранённых!');
+        }
+    };
 
     if (!product) {
         return (
@@ -54,20 +83,14 @@ const Product: React.FC = () => {
                         </MuiTypography>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <Grid item xs={12} sm={6}>
-                                    <MuiTypography variant="body1" color="textSecondary">
-                                        Цена: <MuiTypography component="span" color="primary" variant="body1">{product.price}</MuiTypography>
-                                    </MuiTypography>
-                                </Grid>
-
+                                <MuiTypography variant="body1" color="textSecondary">
+                                    Цена: <MuiTypography component="span" color="primary" variant="body1">{product.price}</MuiTypography>
+                                </MuiTypography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Grid item xs={12} sm={6}>
-                                    <MuiTypography variant="body1" color="textSecondary">
-                                        Категория: <MuiTypography component="span" color="primary" variant="body1">{product.category}</MuiTypography>
-                                    </MuiTypography>
-                                </Grid>
-
+                                <MuiTypography variant="body1" color="textSecondary">
+                                    Категория: <MuiTypography component="span" color="primary" variant="body1">{product.category}</MuiTypography>
+                                </MuiTypography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 {
@@ -87,10 +110,10 @@ const Product: React.FC = () => {
                         <Button size="large" color={isAvailable ? "primary" : "secondary"} component={Link} to={isAvailable ? "/buy" : "/"}>
                             Арендовать
                         </Button>
-                        <Button size="large" color={isAvailable ? "primary" : "secondary"} component={Link} to={isAvailable ? "/buy" : "/feedback"}>
-                            {isAvailable ? "Добавить в сохранённое" : "Добавить в список ожидания"}
+                        <Button size="large" color={isAvailable ? "primary" : "secondary"} onClick={isSaved ? handleRemoveFromSaved : handleAddToSaved}>
+                            {isSaved ? "Удалить из сохранённых" : (isAvailable ? "Добавить в сохранённое" : "Добавить в список ожидания")}
                         </Button>
-                        <Button size="small" color="primary" component={Link} to="/buy">
+                        <Button size="small" color="primary" component={Link} to="/instruction">
                             Как арендовать?
                         </Button>
                         <hr />
