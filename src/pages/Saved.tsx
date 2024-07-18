@@ -2,14 +2,16 @@ import React from 'react';
 import { Container, Typography as MuiTypography, Card, CardMedia, CardContent, CardActions, Button, Grid } from '@mui/material';
 import Layout from './general_components/Layout';
 import { Product } from './Lobby';
+import { useSavedProducts } from './context/SavedProductsContext';
 
 const Saved: React.FC = () => {
     const savedProducts: Product[] = JSON.parse(localStorage.getItem('savedProducts') || '[]');
+    const { updateSavedCount } = useSavedProducts();
 
     const handleRemoveFromSaved = (id: number) => {
         const updatedProducts = savedProducts.filter(product => product.id !== id);
         localStorage.setItem('savedProducts', JSON.stringify(updatedProducts));
-        window.location.reload();
+        updateSavedCount();
     };
 
     return (

@@ -1,10 +1,12 @@
 import React from 'react';
-
-// MaterialUI
 import { Box, Typography, IconButton, InputBase, Badge } from '@mui/material';
 import { Search, AccountCircle, ShoppingCart } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { useSavedProducts } from '../context/SavedProductsContext';
 
-function Header() {
+const Header: React.FC = () => {
+    const { savedCount } = useSavedProducts();
+
     return (
         <>
             <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
@@ -20,18 +22,17 @@ function Header() {
                 </IconButton>
             </Box>
             <Box sx={{ display: 'flex' }}>
-                <IconButton color="inherit">
+                <IconButton component={Link} to="/profile" color="inherit">
                     <AccountCircle />
                 </IconButton>
-                <IconButton color="inherit">
-                    <Badge badgeContent={0} color="error">
+                <IconButton component={Link} to="/saved" color="inherit">
+                    <Badge badgeContent={savedCount} color="error">
                         <ShoppingCart />
                     </Badge>
                 </IconButton>
             </Box>
         </>
-
     );
-}
+};
 
 export default Header;

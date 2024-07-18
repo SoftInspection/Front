@@ -35,7 +35,7 @@ const Product: React.FC = () => {
             savedProducts.push(product);
             localStorage.setItem('savedProducts', JSON.stringify(savedProducts));
             setIsSaved(true);
-            alert('Товар добавлен в сохранённое!');
+            window.location.reload();
         }
     };
 
