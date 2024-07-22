@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
 
 const Lobby: React.FC = () => {
     return (
-        <Layout>
+        <Layout pagename="Главная страница">
             <ProductGrid />
         </Layout>
     );

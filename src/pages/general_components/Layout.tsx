@@ -70,10 +70,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 interface LayoutProps {
+    pagename: string;
     children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
 
@@ -101,7 +102,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             >
                                 <MenuIcon />
                             </IconButton>
-                            <Header />
+                            <Header pagename={pagename} />
                         </Toolbar>
                     </AppBar>
                     <Drawer

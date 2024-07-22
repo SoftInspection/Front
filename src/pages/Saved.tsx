@@ -15,7 +15,7 @@ const Saved: React.FC = () => {
     };
 
     return (
-        <Layout>
+        <Layout pagename="Сохранённое">
             <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <MuiTypography variant="h4" gutterBottom>
                     Сохранённые товары

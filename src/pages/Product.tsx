@@ -51,7 +51,7 @@ const Product: React.FC = () => {
 
     if (!product) {
         return (
-            <Layout>
+            <Layout pagename="Потерянный товар">
                 <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '2rem' }}>
                     <MuiTypography color="error" variant="h5" gutterBottom>
                         ТОВАР НЕ НАЙДЕН ИЛИ ЕГО НЕТ В НАЛИЧИИ.
@@ -65,7 +65,7 @@ const Product: React.FC = () => {
     }
 
     return (
-        <Layout>
+        <Layout pagename={product?.name}>
             <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <Card>
                     <CardMedia

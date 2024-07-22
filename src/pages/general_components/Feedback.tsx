@@ -24,7 +24,7 @@ const FeedbackPage: React.FC = () => {
     };
 
     return (
-        <Layout>
+        <Layout pagename="Обратная связь">
             <Container maxWidth="md" style={{ marginTop: '2rem' }}>
                 <CSSTransition
                     in={isSent}

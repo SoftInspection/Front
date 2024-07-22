@@ -15,7 +15,7 @@ const UndefinedAddress: React.FC = () => {
     };
 
     return (
-        <Layout>
+        <Layout pagename="404">
             <Container maxWidth="md" sx={{ textAlign: 'center', mt: 8 }}>
                 <Typography variant="h1" color="error" component="div" gutterBottom>
                     404

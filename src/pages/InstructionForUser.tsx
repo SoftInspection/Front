@@ -207,7 +207,7 @@ const InstructionForUser: React.FC = () => {
     };
 
     return (
-        <Layout>
+        <Layout pagename="Инструктаж">
             <Box sx={{ width: '100%' }}>
                 <Typography variant="h4" gutterBottom>
                     Как купить подписку?

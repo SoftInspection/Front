@@ -4,13 +4,17 @@ import { Search, AccountCircle, ShoppingCart } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useSavedProducts } from '../context/SavedProductsContext';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    pagename: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ pagename }) => {
     const { savedCount } = useSavedProducts();
 
     return (
         <>
             <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-                Sub2Soft
+                Sub2Soft | {pagename}
             </Typography>
             <Box sx={{ display: { sm: 'flex' }, justifyContent: 'center' }}>
                 <InputBase

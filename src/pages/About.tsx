@@ -9,7 +9,7 @@ import IMG from "./general_components/creativecommonsimg.png";
 
 const About: React.FC = () => {
     return (
-        <Layout>
+        <Layout pagename="О нас">
             <Container maxWidth="md">
                 <Box sx={{ my: 4 }}>
                     <Typography variant="h1" component="h1" gutterBottom>

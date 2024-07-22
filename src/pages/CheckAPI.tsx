@@ -9,7 +9,7 @@ const CheckAPI: React.FC<CheckAPIProps> = ({ isAdmin }) => {
     // return <>ЗДЕСЬ БУДЕТ ИНФОРМАЦИЯ О ДАННЫХ С API-МОСТА.</>
     return (
         <>
-            <Layout>
+            <Layout pagename="API">
                 {
                     !isAdmin ?
                         <><p>Извините, но вы не являетесь администратором.</p></> :
