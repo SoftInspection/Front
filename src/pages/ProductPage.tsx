@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { PRODUCTS } from './Lobby';
-import { Container, Typography as MuiTypography, Card, CardMedia, CardContent, CardActions, Button, Grid } from '@mui/material';
+import { Container, Typography as MuiTypography, Card, CardMedia, Chip, Box, CardContent, CardActions, Button, Grid } from '@mui/material';
+import Product from "./general_components/Product";
 import Layout from './general_components/Layout';
 
-interface ProductStruct {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    category: string;
-    stock: number;
-    image: string;
-}
-
-const Product: React.FC = () => {
+const ProductPage: React.FC = () => {
     const { name } = useParams<{ name: string }>();
-    const product = PRODUCTS.find((p: ProductStruct) => p.name === name);
+    const product = PRODUCTS.find((p: Product) => p.name === name);
     const isAvailable = product?.stock !== 0;
 
     const [isSaved, setIsSaved] = useState<boolean>(false);
@@ -24,7 +15,7 @@ const Product: React.FC = () => {
     useEffect(() => {
         const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
         if (product) {
-            const isProductSaved = savedProducts.some((savedProduct: ProductStruct) => savedProduct.id === product.id);
+            const isProductSaved = savedProducts.some((savedProduct: Product) => savedProduct.id === product.id);
             setIsSaved(isProductSaved);
         }
     }, [product]);
@@ -42,7 +33,7 @@ const Product: React.FC = () => {
     const handleRemoveFromSaved = () => {
         const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
         if (product) {
-            const updatedSavedProducts = savedProducts.filter((savedProduct: ProductStruct) => savedProduct.id !== product.id);
+            const updatedSavedProducts = savedProducts.filter((savedProduct: Product) => savedProduct.id !== product.id);
             localStorage.setItem('savedProducts', JSON.stringify(updatedSavedProducts));
             setIsSaved(false);
             alert('Товар удалён из сохранённых!');
@@ -104,6 +95,21 @@ const Product: React.FC = () => {
                                 }
                             </Grid>
                         </Grid>
+                        <br />
+                        <Grid item xs={12} sm={6}>
+                            <Box display="flex" flexWrap="wrap" gap={1.5}>
+                                {product.tags?.map(tag => (
+                                    <Chip
+                                        key={tag}
+                                        label={tag}
+                                        variant="outlined"
+                                        color="primary"
+                                        size="medium"
+                                    />
+                                ))}
+                            </Box>
+                        </Grid>
+                        <hr />
                     </CardContent>
                     <hr />
                     <CardActions>
@@ -124,4 +130,4 @@ const Product: React.FC = () => {
     );
 };
 
-export default Product;
+export default ProductPage;

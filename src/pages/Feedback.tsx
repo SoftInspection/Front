@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Container, Typography, TextField, MenuItem, Button, Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
-import Layout from "./Layout";
+import Layout from "./general_components/Layout";
 import { CSSTransition } from 'react-transition-group';
-import './Styles/Feedback.css';
+import './general_components/Styles/Feedback.css';
 
 const FeedbackPage: React.FC = () => {
     const [reason, setReason] = useState<string>('');

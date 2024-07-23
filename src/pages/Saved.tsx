@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Typography as MuiTypography, Card, CardMedia, CardContent, CardActions, Button, Grid } from '@mui/material';
 import Layout from './general_components/Layout';
-import { Product } from './Lobby';
+import Product from './general_components/Product';
 import { useSavedProducts } from './context/SavedProductsContext';
 
 const Saved: React.FC = () => {
