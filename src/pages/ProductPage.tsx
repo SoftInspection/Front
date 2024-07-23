@@ -36,7 +36,7 @@ const ProductPage: React.FC = () => {
             const updatedSavedProducts = savedProducts.filter((savedProduct: Product) => savedProduct.id !== product.id);
             localStorage.setItem('savedProducts', JSON.stringify(updatedSavedProducts));
             setIsSaved(false);
-            alert('Товар удалён из сохранённых!');
+            window.location.reload();
         }
     };
 
