@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Box, Collapse, Container, Button, Grid, Typography, Checkbox, FormControlLabel, Divider } from '@mui/material';
 import Layout from "./general_components/Layout";
 import ProductGrid from './ProductGrid';
 import Product from "./general_components/Product";
@@ -316,12 +317,166 @@ export const PRODUCTS: Product[] = [
     },
 ];
 
-const Lobby: React.FC = () => {
+// All categories of products.
+const allCategories = PRODUCTS.flatMap(product => product.category || []);
+const uniqueCategories = Array.from(new Set(allCategories));
+
+// All tags of products.
+const allTags = PRODUCTS.flatMap(product => product.tags || []);
+const uniqueTags = Array.from(new Set(allTags));
+
+
+const FilterSidebar: React.FC = () => {
+    const [openFilters, setOpenFilters] = useState(false);
+    const [openTags, setOpenTags] = useState(false);
+    const [openPrice, setOpenPrice] = useState(false);
+    const [openAvailability, setOpenAvailability] = useState(false);
+    const [showAllFilters, setShowAllFilters] = useState(false);
+
+    const handleClearFilters = () => {
+        setOpenFilters(false);
+        setOpenTags(false);
+        setOpenPrice(false);
+        setOpenAvailability(false);
+        setShowAllFilters(false);
+    };
+
     return (
-        <Layout pagename="Главная страница">
-            <ProductGrid />
-        </Layout>
+        <Box
+            sx={{
+                p: 2,
+                bgcolor: 'background.paper',
+                borderBottom: '1px solid',
+                borderColor: 'divider',
+                mb: 2
+            }}
+        >
+            <Button
+                onClick={() => setShowAllFilters(!showAllFilters)}
+                variant="text"
+            >
+                {showAllFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
+            </Button>
+
+            {showAllFilters && (
+                <>
+                    <Button
+                        onClick={() => setOpenFilters(!openFilters)}
+                        fullWidth
+                        variant="outlined"
+                        sx={{ mb: 1 }}
+                    >
+                        Категория
+                    </Button>
+                    <Collapse in={openFilters}>
+                        <Box sx={{ p: 1 }}>
+                            {uniqueCategories.map(category => (
+                                <FormControlLabel
+                                    control={<Checkbox />}
+                                    label={category}
+                                />
+                            ))}
+                        </Box>
+                    </Collapse>
+
+                    <Button
+                        onClick={() => setOpenTags(!openTags)}
+                        fullWidth
+                        variant="outlined"
+                        sx={{ mb: 1 }}
+                    >
+                        Теги
+                    </Button>
+                    <Collapse in={openTags}>
+                        <Box sx={{ p: 1 }}>
+                            {uniqueTags.map(tag => (
+                                <FormControlLabel
+                                    control={<Checkbox />}
+                                    label={tag}
+                                />
+                            ))}
+                        </Box>
+                    </Collapse>
+
+                    <Button
+                        onClick={() => setOpenPrice(!openPrice)}
+                        fullWidth
+                        variant="outlined"
+                        sx={{ mb: 1 }}
+                    >
+                        Цена
+                    </Button>
+                    <Collapse in={openPrice}>
+                        <Box sx={{ p: 1 }}>
+                            <Typography variant="body2">Цена от:</Typography>
+                            <input type="number" placeholder="Минимум" />
+                            <Typography variant="body2">До:</Typography>
+                            <input type="number" placeholder="Максимум" />
+                        </Box>
+                    </Collapse>
+
+                    <Button
+                        onClick={() => setOpenAvailability(!openAvailability)}
+                        fullWidth
+                        variant="outlined"
+                        sx={{ mb: 1 }}
+                    >
+                        В наличии
+                    </Button>
+                    <Collapse in={openAvailability}>
+                        <Box sx={{ p: 1 }}>
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="В наличии"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox />}
+                                label="Нет в наличии"
+                            />
+                        </Box>
+                    </Collapse>
+
+                    <Divider sx={{ my: 2 }} />
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        sx={{ mb: 1 }}
+                        onClick={() => console.log("Filters applied")}
+                    >
+                        Применить
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        fullWidth
+                        onClick={handleClearFilters}
+                    >
+                        Очистить фильтры
+                    </Button>
+                </>
+            )}
+        </Box>
     );
 };
 
+const Lobby: React.FC = () => {
+    return (
+        <Layout pagename="Главная страница">
+            <Container>
+                <Box>
+                    <FilterSidebar />
+                    <Box
+                        sx={{
+                            mt: 2,
+                        }}
+                    >
+                        <ProductGrid />
+                    </Box>
+                </Box>
+            </Container>
+        </Layout>
+    );
+};
 export default Lobby;
