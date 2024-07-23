@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { PRODUCTS } from './Lobby';
+import PRODUCTS from "../external_data/Products";
 import { Container, Typography as MuiTypography, Card, CardMedia, Chip, Box, CardContent, CardActions, Button, Grid } from '@mui/material';
 import Product from "./general_components/Product";
 import Layout from './general_components/Layout';

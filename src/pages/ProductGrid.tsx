@@ -1,23 +1,40 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea } from '@mui/material';
-import { PRODUCTS } from './Lobby';
+import PRODUCTS from "../external_data/Products";
 import Product from "./general_components/Product";
 
 const truncateDescription = (description: string, maxLength: number) => {
     return description.length > maxLength ? description.slice(0, maxLength) + '...' : description;
 };
 
-const ProductGrid: React.FC = () => {
+interface ProductGridProps {
+    categories: Set<string>;
+    tags: Set<string>;
+    priceRange: [number | null, number | null];
+    availability: boolean | null;
+}
+
+const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange, availability }) => {
     const navigate = useNavigate();
 
     const handleCardClick = (productName: string) => {
         navigate(`/item/${productName}`);
     };
 
+    const filteredProducts = PRODUCTS.filter(product => {
+        const inCategory = categories.size === 0 || categories.has(product.category);
+        const inTags = (tags.size === 0 || product.tags?.some(tag => tags.has(tag))) ?? false;
+        const inPriceRange = (priceRange[0] === null || product.price >= priceRange[0]) &&
+            (priceRange[1] === null || product.price <= priceRange[1]);
+        const inAvailability = availability === null || availability === product.stock;
+
+        return inCategory && inTags && inPriceRange && inAvailability;
+    });
+
     return (
         <Grid container spacing={4}>
-            {PRODUCTS.map((product: Product) => (
+            {filteredProducts.map((product: Product) => (
                 <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                     <CardActionArea onClick={() => handleCardClick(product.name)}>
                         <Card>
