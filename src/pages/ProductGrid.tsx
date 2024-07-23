@@ -2,16 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea } from '@mui/material';
 import { PRODUCTS } from './Lobby';
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description: string;
-    category: string;
-    stock: number;
-    image: string;
-}
+import Product from "./general_components/Product";
 
 const truncateDescription = (description: string, maxLength: number) => {
     return description.length > maxLength ? description.slice(0, maxLength) + '...' : description;
@@ -50,7 +41,7 @@ const ProductGrid: React.FC = () => {
                                     Категория: {product.category}
                                 </MuiTypography>
                                 <MuiTypography variant="body2" color="text.secondary">
-                                    В наличии: {product.stock}
+                                    {product.stock ? "В наличии" : "Не в наличии"}
                                 </MuiTypography>
                             </CardContent>
                         </Card>
