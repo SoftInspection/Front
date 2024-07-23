@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["текстовый редактор", "программирование", "редактирование текста", "интерфейс", "плагин", "подсветка синтаксиса", "многофункциональный", "открытый исходный код", "персонализация", "многозадачность"],
-        stock: 25,
+        stock: true,
         image: '?'
     },
     {
@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["автоматизация", "чат-бот", "AI", "обработка языка", "обучение", "поддержка", "интерактивность", "сценарии", "интеграция", "обратная связь"],
-        stock: 15,
+        stock: true,
         image: '?'
     },
     {
@@ -41,7 +41,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["безопасность", "криптовалюта", "инвестиции", "доступ", "блокчейн", "платежи", "аутентификация", "персональные данные", "права", "разрешения"],
-        stock: 50,
+        stock: false,
         image: '?'
     },
     {
@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["автоматизация", "бот для соцсетей", "продвижение", "анализ", "взаимодействие", "интеграция", "планирование", "социальные сети", "оптимизация", "масс-фоловинг"],
-        stock: 0,
+        stock: true,
         image: '?'
     },
     {
@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["антивирус", "система безопасности", "программное обеспечение", "сканирование", "защита данных", "обновления", "интерфейс", "веб-защита", "мониторинг", "оптимизация"],
-        stock: 10,
+        stock: true,
         image: '?'
     },
     {
@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["графический редактор", "дизайн", "фоторедактор", "инструменты", "цветокоррекция", "макеты", "векторная графика", "фотография", "ретушь", "плагин"],
-        stock: 30,
+        stock: false,
         image: '?'
     },
     {
@@ -81,7 +81,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["бот для бизнеса", "интеграция", "обработка данных", "анализ", "отчеты", "мониторинг", "проектное управление", "AI", "обратная связь", "поддержка клиентов"],
-        stock: 20,
+        stock: true,
         image: '?'
     },
     {
@@ -91,7 +91,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["токенизация", "инвестиции", "криптоактивы", "блокчейн", "система прав", "собственность", "безопасность", "финансовые транзакции", "платежи", "анализ"],
-        stock: 35,
+        stock: true,
         image: '?'
     },
     {
@@ -101,7 +101,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["производительность", "инструменты", "оптимизация", "управление задачами", "планирование", "приложение", "интерфейс", "отчеты", "анализ", "многозадачность"],
-        stock: 40,
+        stock: true,
         image: '?'
     },
     {
@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["развлекательный бот", "игры", "анализ поведения", "интерактивность", "пользовательский опыт", "интеграция", "развлечение", "платформа", "награды", "механики"],
-        stock: 5,
+        stock: true,
         image: '?'
     },
     {
@@ -121,7 +121,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["инвестиционный токен", "криптоэкономика", "токеномика", "инвесторы", "блокчейн", "платежи", "анализ рынка", "безопасность", "финансовые операции", "мобильные платежи"],
-        stock: 60,
+        stock: true,
         image: '?'
     },
     {
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["управление проектами", "планирование", "инструменты", "производительность", "оптимизация", "анализ", "интерфейс", "функциональность", "отчеты", "управление ресурсами"],
-        stock: 12,
+        stock: true,
         image: '?'
     },
     {
@@ -141,7 +141,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["бот для продаж", "автоматизация", "анализ данных", "CRM", "управление", "интеграция", "обратная связь", "поддержка клиентов", "платформа", "оптимизация"],
-        stock: 8,
+        stock: true,
         image: '?'
     },
     {
@@ -151,7 +151,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["децентрализованные финансы", "смарт-контракты", "криптоактивы", "платежи", "инвестиции", "блокчейн", "токенизация", "анализ рисков", "финансовые инструменты", "безопасность"],
-        stock: 20,
+        stock: true,
         image: '?'
     },
     {
@@ -161,7 +161,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["фотообработка", "графический дизайн", "векторная графика", "редактирование", "творчество", "инструменты", "плагин", "многослойность", "интерфейс", "оптимизация"],
-        stock: 18,
+        stock: true,
         image: '?'
     },
     {
@@ -171,7 +171,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["финансовый бот", "анализ", "интеграция", "управление", "обработка данных", "платежи", "интерактивность", "безопасность", "пользовательский интерфейс", "оптимизация"],
-        stock: 10,
+        stock: true,
         image: '?'
     },
     {
@@ -181,7 +181,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["анализ данных", "управление проектами", "инструменты", "планирование", "отчеты", "производительность", "интерфейс", "функциональность", "оптимизация", "пользовательский опыт"],
-        stock: 22,
+        stock: true,
         image: '?'
     },
     {
@@ -191,7 +191,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["маркетинг", "автоматизация", "анализ", "взаимодействие", "платформа", "поддержка клиентов", "интеграция", "статистика", "оптимизация", "пользовательский интерфейс"],
-        stock: 6,
+        stock: true,
         image: '?'
     },
     {
@@ -201,7 +201,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["токенизация", "инвестиции", "платежи", "блокчейн", "децентрализованные финансы", "криптоактивы", "анализ рынка", "финансовые инструменты", "безопасность", "платформа"],
-        stock: 25,
+        stock: true,
         image: '?'
     },
     {
@@ -211,7 +211,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["менеджмент", "производительность", "анализ", "планирование", "управление", "инструменты", "оптимизация", "интерфейс", "отчеты", "функциональность"],
-        stock: 28,
+        stock: true,
         image: '?'
     },
     {
@@ -221,7 +221,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["бот для аналитики", "обработка данных", "платформа", "интеграция", "аналитика", "взаимодействие", "поддержка", "сбор данных", "оптимизация", "функциональность"],
-        stock: 15,
+        stock: true,
         image: '?'
     },
     {
@@ -231,7 +231,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["криптовалюта", "инвестиции", "блокчейн", "токенизация", "платежи", "анализ рынка", "безопасность", "финансовые операции", "платформа", "токеномика"],
-        stock: 55,
+        stock: true,
         image: '?'
     },
     {
@@ -241,7 +241,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["обработка видео", "видеоредактор", "творчество", "редактирование", "инструменты", "эффекты", "монтаж", "плагин", "векторная графика", "анализ"],
-        stock: 20,
+        stock: true,
         image: '?'
     },
     {
@@ -251,7 +251,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["интерактивность", "платформа", "анализ данных", "интеграция", "маркетинг", "оптимизация", "поддержка", "автоматизация", "CRM", "интерфейс"],
-        stock: 8,
+        stock: true,
         image: '?'
     },
     {
@@ -261,7 +261,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["блокчейн", "инвестиции", "криптовалюта", "платежи", "анализ рынка", "безопасность", "токенизация", "финансовые инструменты", "платформа", "токеномика"],
-        stock: 45,
+        stock: true,
         image: '?'
     },
     {
@@ -271,7 +271,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["управление задачами", "производительность", "анализ", "интерфейс", "инструменты", "планирование", "отчеты", "оптимизация", "функциональность", "управление"],
-        stock: 32,
+        stock: true,
         image: '?'
     },
     {
@@ -281,7 +281,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["бизнес-бот", "автоматизация", "платформа", "анализ данных", "интеграция", "пользовательский интерфейс", "поддержка клиентов", "оптимизация", "маркетинг", "интерактивность"],
-        stock: 12,
+        stock: true,
         image: '?'
     },
     {
@@ -291,7 +291,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Токен',
         tags: ["токенизация", "инвестиции", "криптоактивы", "платежи", "блокчейн", "анализ рынка", "финансовые инструменты", "платформа", "токеномика", "безопасность"],
-        stock: 18,
+        stock: true,
         image: '?'
     },
     {
@@ -301,7 +301,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Софт',
         tags: ["планирование", "производительность", "анализ", "управление проектами", "инструменты", "отчеты", "интерфейс", "оптимизация", "функциональность", "интеграция"],
-        stock: 24,
+        stock: true,
         image: '?'
     },
     {
@@ -311,7 +311,7 @@ export const PRODUCTS: Product[] = [
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
         category: 'Бот',
         tags: ["интеграция", "анализ данных", "платформа", "поддержка", "обратная связь", "автоматизация", "интерактивность", "CRM", "оптимизация", "пользовательский интерфейс"],
-        stock: 10,
+        stock: true,
         image: '?'
     },
 ];

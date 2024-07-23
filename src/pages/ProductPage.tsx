@@ -8,7 +8,7 @@ import Layout from './general_components/Layout';
 const ProductPage: React.FC = () => {
     const { name } = useParams<{ name: string }>();
     const product = PRODUCTS.find((p: Product) => p.name === name);
-    const isAvailable = product?.stock !== 0;
+    const isAvailable = product?.stock !== false;
 
     const [isSaved, setIsSaved] = useState<boolean>(false);
 
@@ -87,8 +87,8 @@ const ProductPage: React.FC = () => {
                                 {
                                     isAvailable ?
                                         <React.Fragment>
-                                            <MuiTypography variant="body1" color="textSecondary">
-                                                В наличии: <MuiTypography component="span" color="primary" variant="body1">{product.stock}</MuiTypography>
+                                            <MuiTypography variant="body1" color="lime">
+                                                В НАЛИЧИИ
                                             </MuiTypography>
                                         </React.Fragment> :
                                         <MuiTypography variant="body1" color="error">НЕТ В НАЛИЧИИ</MuiTypography>
