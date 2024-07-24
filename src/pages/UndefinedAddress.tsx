@@ -11,7 +11,7 @@ const UndefinedAddress: React.FC = () => {
         setLoading(true);
         setTimeout(() => {
             window.location.reload();
-        }, 1000); // Delay just for demonstration.
+        }, 1000); //* Delay ONLY FOR DEMONSTRATION.
     };
 
     return (

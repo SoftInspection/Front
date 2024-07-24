@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PRODUCTS from "../external_data/Products";
-import { Container, Typography as MuiTypography, Card, CardMedia, Chip, Box, CardContent, CardActions, Button, Grid } from '@mui/material';
+import { Container, Typography as MuiTypography, Card, CardMedia, Chip, Box, CardContent, CardActions, Button, Grid, CircularProgress } from '@mui/material';
 import Product from "./general_components/Product";
 import Layout from './general_components/Layout';
 
@@ -10,7 +10,26 @@ const ProductPage: React.FC = () => {
     const product = PRODUCTS.find((p: Product) => p.name === name);
     const isAvailable = product?.stock !== false;
 
+    // To add fake comments from JSONPLACEHOLDER.TYPICOM.COM.
+    const [comments, setComments] = useState<any[]>([]);
+    const [isCommentsLoaded, setIsCommentsLoaded] = useState<boolean>(false);
+
     const [isSaved, setIsSaved] = useState<boolean>(false);
+
+    // Load fake comments.
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/comments')
+            .then(response => response.json())
+            .then(data => {
+                setComments(data);
+                setIsCommentsLoaded(true);
+            })
+            .catch(error => {
+                console.error('Ошибка при загрузке комментариев:', error);
+                setIsCommentsLoaded(false);
+            });
+    }, []);
+
 
     useEffect(() => {
         const savedProducts = JSON.parse(localStorage.getItem('savedProducts') || '[]');
@@ -124,6 +143,31 @@ const ProductPage: React.FC = () => {
                         </Button>
                         <hr />
                     </CardActions>
+                    <CardContent>
+                        <MuiTypography variant="h5" gutterBottom>
+                            Комментарии
+                        </MuiTypography>
+                        {isCommentsLoaded ? (
+                            // Getting comments from random 10-values range from jsonplaceholder's API
+                            comments.slice(0, 5).map(comment => (
+                                <Box key={comment.id} mb={2} p={2} border={1} borderColor="grey.300" borderRadius={4}>
+                                    <MuiTypography variant="body1" gutterBottom>
+                                        <strong>{comment.email}</strong>
+                                    </MuiTypography>
+                                    <MuiTypography variant="body2" color="textSecondary">
+                                        {comment.body}
+                                    </MuiTypography>
+                                </Box>
+                            ))
+                        ) : (
+                            <React.Fragment>
+                                <CircularProgress />
+                                <MuiTypography variant="body2" color="textSecondary">
+                                    Загрузка комментариев...
+                                </MuiTypography>
+                            </React.Fragment>
+                        )}
+                    </CardContent>
                 </Card>
             </Container>
         </Layout>
