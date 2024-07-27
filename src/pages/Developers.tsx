@@ -6,7 +6,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 interface Developer {
     name: string;
     description: string;
-    imageUrl: string;
+    imageUrl?: string;
+    githubUsername?: string;
     socials?: { platform: string, url: string }[];
 }
 
@@ -14,7 +15,7 @@ const developers: Developer[] = [
     {
         name: 'Dilemma Fixer',
         description: 'Ведущий разработчик backend.',
-        imageUrl: 'https://via.placeholder.com/150',
+        githubUsername: 'DilemaFixer',
         socials: [
             { platform: 'github', url: 'https://github.com/DilemaFixer' },
             { platform: 'linkedin', url: 'https://www.linkedin.com/in/illa-shishko-088960251/' }
@@ -23,7 +24,7 @@ const developers: Developer[] = [
     {
         name: 'Suchhzz',
         description: 'Разработчик backend.',
-        imageUrl: 'https://via.placeholder.com/150',
+        githubUsername: 'suchhzz',
         socials: [
             { platform: 'github', url: 'https://github.com/suchhzz' }
         ]
@@ -31,7 +32,7 @@ const developers: Developer[] = [
     {
         name: 'Ejtolf S. Dargqvist',
         description: 'Ведущий разработчик frontend.',
-        imageUrl: 'https://via.placeholder.com/150',
+        githubUsername: 'Ejtolf',
         socials: [
             { platform: 'github', url: 'https://github.com/Ejtolf' },
             { platform: 'linkedin', url: 'https://linkedin.com/in/Ejtolf' }
@@ -40,6 +41,24 @@ const developers: Developer[] = [
 ];
 
 const Developers: React.FC = () => {
+    const [avatars, setAvatars] = React.useState<{ [key: string]: string }>({});
+
+    React.useEffect(() => {
+        const fetchAvatar = async (username: string) => {
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            if (response.ok) {
+                const data = await response.json();
+                setAvatars(prevAvatars => ({ ...prevAvatars, [username]: data.avatar_url }));
+            }
+        };
+
+        developers.forEach(developer => {
+            if (developer.githubUsername) {
+                fetchAvatar(developer.githubUsername);
+            }
+        });
+    }, []);
+
     return (
         <Grid container spacing={3}>
             {developers.map((developer, index) => (
@@ -48,7 +67,7 @@ const Developers: React.FC = () => {
                         <CardMedia
                             component="img"
                             height="150"
-                            image={developer.imageUrl}
+                            image={avatars[developer.githubUsername || ''] || 'https://via.placeholder.com/150'}
                             alt={developer.name}
                         />
                         <CardContent>

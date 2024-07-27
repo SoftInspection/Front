@@ -148,9 +148,9 @@ const ProductPage: React.FC = () => {
                             Комментарии
                         </MuiTypography>
                         {isCommentsLoaded ? (
-                            // Getting comments from random 10-values range from jsonplaceholder's API
+                            // Getting 5 comments from jsonplaceholder's API.
                             comments.slice(0, 5).map(comment => (
-                                <Box key={comment.id} mb={2} p={2} border={1} borderColor="grey.300" borderRadius={4}>
+                                <Box key={comment.id} mb={2} p={2} border={1} borderRadius={4}>
                                     <MuiTypography variant="body1" gutterBottom>
                                         <strong>{comment.email}</strong>
                                     </MuiTypography>
