@@ -42,6 +42,9 @@ const developers: Developer[] = [
 
 const Developers: React.FC = () => {
     const [avatars, setAvatars] = React.useState<{ [key: string]: string }>({});
+    const [areAvatarsLoaded, setAreAvatarsLoaded] = React.useState<boolean>(false);
+    // Gif while avatars are loading.
+    const loadingSpinnerUrl = 'https://i.gifer.com/ZZ5H.gif';
 
     React.useEffect(() => {
         const fetchAvatar = async (username: string) => {
@@ -55,6 +58,7 @@ const Developers: React.FC = () => {
         developers.forEach(developer => {
             if (developer.githubUsername) {
                 fetchAvatar(developer.githubUsername);
+                setAreAvatarsLoaded(true);
             }
         });
     }, []);
@@ -67,7 +71,7 @@ const Developers: React.FC = () => {
                         <CardMedia
                             component="img"
                             height="150"
-                            image={avatars[developer.githubUsername || ''] || 'https://via.placeholder.com/150'}
+                            image={avatars[developer.githubUsername || ''] || loadingSpinnerUrl}
                             alt={developer.name}
                         />
                         <CardContent>
