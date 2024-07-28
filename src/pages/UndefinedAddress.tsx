@@ -15,7 +15,7 @@ const UndefinedAddress: React.FC = () => {
     };
 
     return (
-        <Layout pagename="404">
+        <React.Fragment>
             <Container maxWidth="md" sx={{ textAlign: 'center', mt: 8 }}>
                 <Typography variant="h1" color="error" component="div" gutterBottom>
                     404
@@ -41,7 +41,7 @@ const UndefinedAddress: React.FC = () => {
                     )}
                 </Box>
             </Container>
-        </Layout>
+        </React.Fragment>
     );
 };
 

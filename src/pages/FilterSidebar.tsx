@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Collapse, Button, Typography, Checkbox, FormControlLabel, Divider } from '@mui/material';
+import { Box, Collapse, Button, Typography, Checkbox, FormControlLabel, Divider, TextField } from '@mui/material';
 
 interface FilterSidebarProps {
     categories: string[];
@@ -28,6 +28,17 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
     const [openTags, setOpenTags] = React.useState(false);
     const [openPrice, setOpenPrice] = React.useState(false);
     const [openAvailability, setOpenAvailability] = React.useState(false);
+
+    const [categorySearch, setCategorySearch] = React.useState('');
+    const [tagSearch, setTagSearch] = React.useState('');
+
+    const filteredCategories = categories.filter(category =>
+        category.toLowerCase().includes(categorySearch.toLowerCase())
+    );
+
+    const filteredTags = tags.filter(tag =>
+        tag.toLowerCase().includes(tagSearch.toLowerCase())
+    );
 
     return (
         <Box
@@ -58,7 +69,16 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                     </Button>
                     <Collapse in={openFilters}>
                         <Box sx={{ p: 1 }}>
-                            {categories.map(category => (
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                size="small"
+                                placeholder="найти категорию"
+                                value={categorySearch}
+                                onChange={(e) => setCategorySearch(e.target.value)}
+                                sx={{ mb: 1 }}
+                            />
+                            {filteredCategories.map(category => (
                                 <FormControlLabel
                                     key={category}
                                     control={<Checkbox onChange={(e) => onCategoryChange(category, e.target.checked)} />}
@@ -78,7 +98,16 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                     </Button>
                     <Collapse in={openTags}>
                         <Box sx={{ p: 1 }}>
-                            {tags.map(tag => (
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                size="small"
+                                placeholder="найти тэг"
+                                value={tagSearch}
+                                onChange={(e) => setTagSearch(e.target.value)}
+                                sx={{ mb: 1 }}
+                            />
+                            {filteredTags.map(tag => (
                                 <FormControlLabel
                                     key={tag}
                                     control={<Checkbox onChange={(e) => onTagChange(tag, e.target.checked)} />}
