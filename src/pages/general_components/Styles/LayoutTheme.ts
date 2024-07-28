@@ -4,17 +4,17 @@ const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#90caf9',
+            main: '#2979ff', // глубокий синий
         },
         secondary: {
-            main: '#f48fb1',
+            main: '#ff4081', // насыщенный розовый
         },
         background: {
-            paper: '#1f1f1f',
+            paper: '#0d0d0d', // еще более темный фон
         },
         text: {
-            primary: '#e0e0e0',
-            secondary: '#b0b0b0'
+            primary: '#ffffff', // чисто белый для основного текста
+            secondary: '#a0a0a0' // светлее для второстепенного текста
         },
     },
 });
