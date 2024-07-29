@@ -152,9 +152,9 @@ const ProductPage: React.FC = () => {
                             comments.slice(0, 5).map(comment => (
                                 <Box key={comment.id} mb={2} p={2} border={1} borderRadius={4}>
                                     <MuiTypography variant="body1" gutterBottom>
-                                        <strong>{comment.email}</strong>
+                                        <strong style={{ color: "#ff80ab" }}>{comment.email}</strong>
                                     </MuiTypography>
-                                    <MuiTypography variant="body2" color="textSecondary">
+                                    <MuiTypography variant="body2" color="textPrimary">
                                         {comment.body}
                                     </MuiTypography>
                                 </Box>

@@ -9,6 +9,7 @@ const Profile: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isPasswordRelevant, setIsPasswordRelevant] = useState<boolean>(true); // Checks the password on demandings (more than 7 characters and are there LETTRS and DIGITS.)
 
     const steps = ['Введите электронную почту', 'Создайте логин и пароль'];
 
@@ -23,13 +24,20 @@ const Profile: React.FC = () => {
     }, []);
 
     const handleChangeIsLoggedIn = () => {
-        setIsLoggedIn(!isLoggedIn);
-        if (!isLoggedIn) {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', username);
+        if (password.length >= 7 &&              // Checks for length (can't be less than 7 characters).
+            /[a-zA-Z]/.test(password) &&         // Checks for letters availability.
+            /[0-9]/.test(password)) {            // Check for digits availability.
+            setIsPasswordRelevant(true);
+            setIsLoggedIn(!isLoggedIn);
+            if (!isLoggedIn) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+            } else {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+            }
         } else {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('username');
+            setIsPasswordRelevant(false);
         }
     };
 
@@ -62,16 +70,6 @@ const Profile: React.FC = () => {
                         margin="normal"
                     />
                 );
-            // case 1:
-            //     return (
-            //         <TextField
-            //             label="Код верификации"
-            //             value={verificationCode}
-            //             onChange={(e) => setVerificationCode(e.target.value)}
-            //             fullWidth
-            //             margin="normal"
-            //         />
-            //     );
             case 1:
                 return (
                     <>
@@ -82,14 +80,26 @@ const Profile: React.FC = () => {
                             fullWidth
                             margin="normal"
                         />
-                        <TextField
-                            label="Пароль"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            fullWidth
-                            margin="normal"
-                        />
+                        {isPasswordRelevant ?
+                            <TextField
+                                label="Пароль"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                fullWidth
+                                margin="normal"
+                            /> :
+                            <TextField
+                                error
+                                label="Пароль"
+                                type="password"
+                                helperText="Пароль должен содержать не менее 7 символов а так же состоять из букв и цифр."
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                fullWidth
+                                margin="normal"
+                            />
+                        }
                     </>
                 );
             default:
