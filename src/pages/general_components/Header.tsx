@@ -9,7 +9,15 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ pagename }) => {
+    const [searchFieldValue, setSearchFieldValue] = React.useState<string>("");
+    const [isSearchButtonClicked, setIsSearchButtonClicked] = React.useState<boolean>(false);
     const { savedCount } = useSavedProducts();
+
+    const handleChangeIsSearchButtonClicked = () => {
+        setIsSearchButtonClicked(true);
+        setSearchFieldValue("");
+        setIsSearchButtonClicked(false);
+    }
 
     return (
         <>
@@ -19,9 +27,11 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
             <Box sx={{ display: { sm: 'flex' }, justifyContent: 'center' }}>
                 <InputBase
                     placeholder="Search here"
+                    value={searchFieldValue}
+                    onChange={(e) => setSearchFieldValue(e.target.value)}
                     sx={{ mr: 1 }}
                 />
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={handleChangeIsSearchButtonClicked}>
                     <Search />
                 </IconButton>
             </Box>
