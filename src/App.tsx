@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Lobby from "./pages/Lobby";
 import UndefinedAddress from './pages/UndefinedAddress';
 import CheckAPI from "./pages/CheckAPI"
@@ -18,7 +18,6 @@ import './App.css';
 function App() {
   //! ADMINISTRATOR STATUS.
   const isAdmin = true;
-  const isLoggedIn = false;
   //! --------------------
 
   return (
