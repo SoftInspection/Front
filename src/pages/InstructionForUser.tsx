@@ -61,7 +61,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"КУПИТЕ ПОДПИСКУ"}
                     />
                     <CardContent>
@@ -82,7 +82,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ПОЛУЧИТЕ КЛЮЧ"}
                     />
                     <CardContent>
@@ -103,7 +103,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ВОСПОЛЬЗУЙТЕСЬ БОТОМ"}
                     />
                     <CardContent>
@@ -130,7 +130,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ИСПОЛЬЗУЙТЕ КЛЮЧ"}
                     />
                     <CardContent>
@@ -151,7 +151,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ПОЛЬЗУЙТЕСЬ"}
                     />
                     <CardContent>
@@ -168,19 +168,10 @@ const instructionsForInstall = [
     )
 ];
 
-interface Developer {
-    name: string;
-    description: string;
-    imageUrl: string;
-}
-
 const InstructionForUser: React.FC = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
-    const isStepOptional = (step: number) => {
-        return step === 1;
-    };
 
     const isStepSkipped = (step: number) => {
         return skipped.has(step);
