@@ -63,13 +63,13 @@ const PRODUCTS: Product[] = [
     },
     {
         id: 7,
-        name: 'Бот 3',
+        name: 'IntelliJ IDEA 2021',
         price: 599.99,
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi perferendis accusamus eius exercitationem illo modi aperiam dolorum ex inventore? Excepturi amet nam quibusdam autem expedita modi animi sunt rerum iure!",
-        category: 'Бот',
-        tags: ["бот для бизнеса", "интеграция", "обработка данных", "анализ", "отчеты", "мониторинг", "проектное управление", "AI", "обратная связь", "поддержка клиентов"],
+        description: "IntelliJ IDEA — интегрированная среда разработки программного обеспечения для многих языков программирования, в частности Java, JavaScript, Python, разработанная компанией JetBrains Начиная с версии 9.0 среда доступна в двух редакциях: Community Edition и Ultimate Edition. Community Edition является полностью свободной версией, доступной под лицензией Apache 2.0, в ней реализована полная поддержка Java SE, Kotlin, Groovy, Scala, а также интеграция с наиболее популярными системами управления версиями. В редакции Ultimate Edition, доступной под коммерческой лицензией, реализована поддержка Jakarta EE, UML-диаграмм, подсчёт покрытия кода, а также поддержка других систем управления версиями, языков и фреймворков..",
+        category: 'Софт',
+        tags: ["JetBrains", "Программирование", "Среда разработки", "JavaScript", "Бэкэнд", "Рефакторинг", "Тестирование", "Системы контроля версий", "Плагины", "Многоплатформенность", "Spring", "Базы данных"],
         stock: true,
-        image: '?'
+        image: 'https://dl.flathub.org/media/com/jetbrains/IntelliJ-IDEA-Community/823159c506d355127d36f6b989bbacc0/icons/128x128@2/com.jetbrains.IntelliJ-IDEA-Community.png'
     },
     {
         id: 8,

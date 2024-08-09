@@ -13,8 +13,8 @@ const ProductPage: React.FC = () => {
     // To add fake comments from JSONPLACEHOLDER.TYPICOM.COM.
     const [comments, setComments] = useState<any[]>([]);
     const [isCommentsLoaded, setIsCommentsLoaded] = useState<boolean>(false);
-
     const [isSaved, setIsSaved] = useState<boolean>(false);
+
 
     // Load fake comments.
     useEffect(() => {
@@ -132,7 +132,8 @@ const ProductPage: React.FC = () => {
                     </CardContent>
                     <hr />
                     <CardActions>
-                        <Button size="large" color={isAvailable ? "primary" : "secondary"} component={Link} to={isAvailable ? "/buy" : "/"}>
+                        {/* <Button size="large" color={isAvailable ? "primary" : "secondary"} component={Link} to={isAvailable ? "/buy" : "/"}> */}
+                        <Button size="large" color={isAvailable ? "primary" : "secondary"} component={Link} to={`/buy/${product?.name}`}>
                             Арендовать
                         </Button>
                         <Button size="large" color={isAvailable ? "primary" : "secondary"} onClick={isSaved ? handleRemoveFromSaved : handleAddToSaved}>

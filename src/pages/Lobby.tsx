@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Button } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Layout from "./general_components/Layout";
 import ProductGrid from './ProductGrid';
 import FilterSidebar from './FilterSidebar';

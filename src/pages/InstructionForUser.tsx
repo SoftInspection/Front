@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Layout from './general_components/Layout';
-import Developers from "./Developers";
 import { Card, CardContent, CardMedia, Grid } from '@mui/material';
 
 const stepsForInstall = ['Выберите софт', 'Пополните токены', 'Купите подписку', 'Получите ключ', 'Воспользуйтесь ботом', 'Используйте ключ', 'Пользуйтесь'];
@@ -20,7 +19,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ВЫБОР СОФТА"}
                     />
                     <CardContent>
@@ -41,7 +40,7 @@ const instructionsForInstall = [
                 <Card>
                     <CardMedia
                         component="img"
-                        height="150"
+                        sx={{ height: '300px', objectFit: 'cover' }}
                         alt={"ПОПОЛНИТЕ ТОКЕНЫ"}
                     />
                     <CardContent>

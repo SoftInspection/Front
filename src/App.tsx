@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import { SavedProductsProvider } from "./pages/context/SavedProductsContext";
 
 import './App.css';
+import BuySoft from "./pages/BuySoft";
 
 function App() {
   //! ADMINISTRATOR STATUS.
@@ -33,6 +34,7 @@ function App() {
             <Route path="/saved" element={<Saved />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/item/:name" element={<ProductPage />} />
+            <Route path="/buy/:name" element={<BuySoft />} />
             <Route path="*" element={<UndefinedAddress />} />
           </Routes>
         </BrowserRouter >
