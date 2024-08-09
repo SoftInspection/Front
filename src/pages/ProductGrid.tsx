@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea } from '@mui/material';
 import PRODUCTS from "../external_data/Products";
 import Product from "./general_components/Product";
@@ -16,7 +16,10 @@ interface ProductGridProps {
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange, availability }) => {
+    const location = useLocation();
     const navigate = useNavigate();
+    
+    const searchFor = location.state?.searchFor ?? "";
 
     const handleCardClick = (productName: string) => {
         navigate(`/item/${productName}`);
@@ -29,8 +32,14 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
             (priceRange[1] === null || product.price <= priceRange[1]);
         const inAvailability = availability === null || availability === product.stock;
 
-        return inCategory && inTags && inPriceRange && inAvailability;
+        const matchesSearch = searchFor === "" || 
+            product.name.toLowerCase().includes(searchFor.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchFor.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchFor.toLowerCase());
+
+        return inCategory && inTags && inPriceRange && inAvailability && matchesSearch;
     });
+
 
     return (
         <Grid container spacing={4}>

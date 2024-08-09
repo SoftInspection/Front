@@ -1,7 +1,8 @@
+// Header.tsx
 import React from 'react';
 import { Box, Typography, IconButton, InputBase, Badge } from '@mui/material';
 import { Search, AccountCircle, ShoppingCart } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSavedProducts } from '../context/SavedProductsContext';
 
 interface HeaderProps {
@@ -12,10 +13,11 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
     const [searchFieldValue, setSearchFieldValue] = React.useState<string>("");
     const [isSearchButtonClicked, setIsSearchButtonClicked] = React.useState<boolean>(false);
     const { savedCount } = useSavedProducts();
+    const navigate = useNavigate();
 
     const handleChangeIsSearchButtonClicked = () => {
         setIsSearchButtonClicked(true);
-        setSearchFieldValue("");
+        navigate("/", { state: { searchFor: searchFieldValue } });
         setIsSearchButtonClicked(false);
     }
 
