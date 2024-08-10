@@ -8,6 +8,7 @@ import './general_components/Styles/Feedback.css';
 const FeedbackPage: React.FC = () => {
     const [reason, setReason] = useState<string>('');
     const [comments, setComments] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [isSent, setIsSent] = useState<boolean>(false);
 
     const handleReasonChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +18,10 @@ const FeedbackPage: React.FC = () => {
     const handleCommentsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setComments(event.target.value);
     };
+
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+    }
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -88,6 +93,18 @@ const FeedbackPage: React.FC = () => {
                                         rows={4}
                                         value={comments}
                                         onChange={handleCommentsChange}
+                                        variant="outlined"
+                                        required
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                <TextField
+                                        fullWidth
+                                        label="Электронная почта"
+                                        multiline
+                                        rows={1}
+                                        value={email}
+                                        onChange={handleEmailChange}
                                         variant="outlined"
                                         required
                                     />

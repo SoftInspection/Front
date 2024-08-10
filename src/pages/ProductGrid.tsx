@@ -40,7 +40,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
         return inCategory && inTags && inPriceRange && inAvailability && matchesSearch;
     });
 
-
     return (
         <Grid container spacing={4}>
             {filteredProducts.map((product: Product) => (

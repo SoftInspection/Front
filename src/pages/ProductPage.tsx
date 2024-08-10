@@ -78,6 +78,7 @@ const ProductPage: React.FC = () => {
         <Layout pagename={product?.name}>
             <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <Card>
+                <Button size="small" component={Link} to="/">На главную</Button>
                     <CardMedia
                         component="img"
                         height="400"

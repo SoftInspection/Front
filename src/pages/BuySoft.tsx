@@ -3,10 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
     Box, Button, Stepper, Step, StepLabel, TextField,
     Card, CardContent, Typography, Accordion, AccordionSummary,
-    AccordionDetails, Alert, LinearProgress, Snackbar, InputAdornment
+    AccordionDetails, Alert, LinearProgress, Snackbar, InputAdornment,
+    Grid, Container, IconButton, Avatar, Dialog, DialogTitle, DialogContent, DialogActions,
+    CircularProgress
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import KeyIcon from '@mui/icons-material/VpnKey';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import PRODUCTS from "../external_data/Products";
 import { motion } from 'framer-motion';
 
@@ -21,19 +23,28 @@ const BuySoft: React.FC = () => {
     const [specialKey, setSpecialKey] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [purchaseComplete, setPurchaseComplete] = useState(false);
+    const [openErrorDialog, setOpenErrorDialog] = useState(false); // Для отображения ошибки
+
+    //! DEMO TOKENS (DEMONSTRATION BALANCE)
+    const balance: number = 600;
+    //! --------
 
     const steps = ['Подтвердите выбор', 'Введите ключ', 'Подтвердите покупку'];
 
     const handleNext = () => {
-        if (activeStep === steps.length - 1) {
-            setPurchaseComplete(true);
-            setTimeout(() => {
-                setOpenSnackbar(true);
-                setPurchaseComplete(false);
-                navigate(`/`);
-            }, 2000);
-        } else {
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if (product) {
+            if (balance < product?.price) {
+                setOpenErrorDialog(true);
+            } else if (activeStep === steps.length - 1) {
+                setPurchaseComplete(true);
+                setTimeout(() => {
+                    setOpenSnackbar(true);
+                    setPurchaseComplete(false);
+                    navigate('/');
+                }, 2000);
+            } else {
+                setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            }
         }
     };
 
@@ -49,9 +60,19 @@ const BuySoft: React.FC = () => {
         setSpecialKey(event.target.value);
     };
 
+    const handlePaste = () => {
+        navigator.clipboard.readText().then((text) => {
+            setSpecialKey(text);
+        });
+    };
+
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
-        navigate(`/`);
+        navigate('/');
+    };
+
+    const handleCloseErrorDialog = () => {
+        setOpenErrorDialog(false);
     };
 
     if (!product) {
@@ -59,12 +80,35 @@ const BuySoft: React.FC = () => {
     }
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 600, margin: 'auto', padding: 2 }}>
-            <Card sx={{ mb: 3 }}>
-                <CardContent>
-                    <Typography variant="h5">{product.name} ({product.category})</Typography>
-                    <Typography variant="h6" color="text.secondary">Цена: ${product.price}</Typography>
-                </CardContent>
+        <Container sx={{ py: 4 }} maxWidth="sm">
+            <Box sx={{ mb: 4, textAlign: 'center' }}>
+                <Typography variant="h4" component="h1">Sub2Soft</Typography>
+                <Typography variant="h6">(Транзакция)</Typography>
+                <Typography variant="h6" color="text.secondary">Баланс: {balance} токенов</Typography>
+            </Box>
+
+            <Card sx={{ mb: 3, p: 2 }}>
+                <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={4}>
+                        <Avatar
+                            variant="rounded"
+                            src={product.image}
+                            alt={product.name}
+                            sx={{ width: '100%', height: 'auto' }}
+                        />
+                    </Grid>
+
+                    <Grid item xs={8}>
+                        <Typography variant="h5" component="h1">{product.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">{product.category}</Typography>
+                        <Typography variant="h6" color="primary" sx={{ mt: 1 }}>Цена: ${product.price}</Typography>
+                        {isAvailable ? (
+                            <Alert severity="success" sx={{ mt: 1 }}>Доступен</Alert>
+                        ) : (
+                            <Alert severity="error" sx={{ mt: 1 }}>Недоступен</Alert>
+                        )}
+                    </Grid>
+                </Grid>
             </Card>
 
             <Stepper activeStep={activeStep} sx={{ mb: 3 }}>
@@ -76,11 +120,10 @@ const BuySoft: React.FC = () => {
             </Stepper>
 
             <LinearProgress variant="determinate" value={(activeStep + 1) * (100 / steps.length)} sx={{ mb: 3 }} />
-
             {activeStep === 0 && (
-                <Card>
+                <Card sx={{ mb: 3 }}>
                     <CardContent>
-                        <Accordion sx={{ mt: 2 }}>
+                        <Accordion>
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                 <Typography>Описание</Typography>
                             </AccordionSummary>
@@ -88,11 +131,6 @@ const BuySoft: React.FC = () => {
                                 <Typography>{product.description}</Typography>
                             </AccordionDetails>
                         </Accordion>
-                        {isAvailable ? (
-                            <Alert severity="success" sx={{ mt: 2 }}>Доступен</Alert>
-                        ) : (
-                            <Alert severity="error" sx={{ mt: 2 }}>Недоступен</Alert>
-                        )}
                     </CardContent>
                 </Card>
             )}
@@ -108,9 +146,11 @@ const BuySoft: React.FC = () => {
                         onChange={handleChange}
                         margin="normal"
                         InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <KeyIcon />
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={handlePaste} edge="end">
+                                        <ContentPasteIcon />
+                                    </IconButton>
                                 </InputAdornment>
                             ),
                         }}
@@ -119,7 +159,7 @@ const BuySoft: React.FC = () => {
             )}
 
             {activeStep === 2 && (
-                <Card>
+                <Card sx={{ mb: 3 }}>
                     <CardContent>
                         <Typography variant="h6">Подтвердите покупку...</Typography>
                         <Typography>Товар: {product.name}</Typography>
@@ -154,7 +194,7 @@ const BuySoft: React.FC = () => {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Typography variant="h4" color="primary">Обработка...</Typography>
+                        <CircularProgress />
                     </motion.div>
                 </Box>
             )}
@@ -165,7 +205,35 @@ const BuySoft: React.FC = () => {
                 onClose={handleCloseSnackbar}
                 message='Покупка состоялась.'
             />
-        </Box>
+
+            {/* Диалоговое окно ошибки */}
+            <Dialog
+                open={openErrorDialog}
+                onClose={handleCloseErrorDialog}
+            >
+                <DialogTitle>Ошибка</DialogTitle>
+                <DialogContent>
+                    <Typography>Недостаточно токенов для покупки.</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        onClick={() => navigate('/profile')}
+                    >
+                        Пополнить баланс токенов
+                    </Button>
+                    <Button
+                        onClick={() => navigate('/')}
+                    >
+                        На главную
+                    </Button>
+                    <Button
+                        onClick={() => window.location.reload()}
+                    >
+                        Перезагрузить
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Container>
     );
 }
 
