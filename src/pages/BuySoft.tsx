@@ -33,14 +33,27 @@ const BuySoft: React.FC = () => {
 
     const handleNext = () => {
         if (product) {
-            if (balance < product?.price) {
-                setOpenErrorDialog(true);
+            // Checking if number of tokens allows user to buy
+            if (balance < product?.price) { 
+                setOpenErrorDialog(true); // Dialog that user has no enough tokens.
             } else if (activeStep === steps.length - 1) {
-                setPurchaseComplete(true);
+                setPurchaseComplete(true); 
+    
+                // Creating new local storage if product will be bought.
+                const boughtProducts = JSON.parse(localStorage.getItem('boughtProducts') || '[]');
+                boughtProducts.push({
+                    name: product.name,
+                    price: product.price,
+                    specialKey: specialKey,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('boughtProducts', JSON.stringify(boughtProducts));
+    
                 setTimeout(() => {
                     setOpenSnackbar(true);
                     setPurchaseComplete(false);
                     navigate('/');
+                    window.location.reload();
                 }, 2000);
             } else {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
