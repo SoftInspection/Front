@@ -56,6 +56,10 @@ const Profile: React.FC = () => {
         setIsLoggedIn(false);
         setUsername('');
         setEmail('');
+
+        window.location.reload();
+
+        localStorage.clear();
     };
 
     const renderStepContent = (step: number) => {

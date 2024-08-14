@@ -16,6 +16,7 @@ const BuySoft: React.FC = () => {
     const { name } = useParams<{ name: string }>();
     const product = PRODUCTS.find((p) => p.name === name);
     const isAvailable = product?.stock !== false;
+    const storedLoggedIn = localStorage.getItem("isLoggedIn");
 
     const navigate = useNavigate();
 
@@ -23,7 +24,8 @@ const BuySoft: React.FC = () => {
     const [specialKey, setSpecialKey] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [purchaseComplete, setPurchaseComplete] = useState(false);
-    const [openErrorDialog, setOpenErrorDialog] = useState(false); // Для отображения ошибки
+    const [openErrorDialog, setOpenErrorDialog] = useState(false); // To show the error that user has no enough tokens. 
+    const [openAuthDialog, setOpenAuthDialog] = useState(storedLoggedIn !== 'true'); // Show dialog if not logged in
 
     //! DEMO TOKENS (DEMONSTRATION BALANCE)
     const balance: number = 600;
@@ -42,9 +44,10 @@ const BuySoft: React.FC = () => {
                 // Creating new local storage if product will be bought.
                 const boughtProducts = JSON.parse(localStorage.getItem('boughtProducts') || '[]');
                 boughtProducts.push({
+                    id: product.id,
+                    image: product.image,
                     name: product.name,
                     price: product.price,
-                    specialKey: specialKey,
                     date: new Date().toISOString()
                 });
                 localStorage.setItem('boughtProducts', JSON.stringify(boughtProducts));
@@ -86,6 +89,11 @@ const BuySoft: React.FC = () => {
 
     const handleCloseErrorDialog = () => {
         setOpenErrorDialog(false);
+    };
+
+    const handleCloseAuthDialog = () => {
+        setOpenAuthDialog(false);
+        navigate('/');
     };
 
     if (!product) {
@@ -243,6 +251,29 @@ const BuySoft: React.FC = () => {
                         onClick={() => window.location.reload()}
                     >
                         Перезагрузить
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Диалоговое окно авторизации */}
+            <Dialog
+                open={openAuthDialog}
+                onClose={handleCloseAuthDialog}
+            >
+                <DialogTitle>Необходима авторизация</DialogTitle>
+                <DialogContent>
+                    <Typography>Пожалуйста, войдите в систему для продолжения.</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button 
+                        onClick={() => navigate('/profile')}
+                    >
+                        Войти
+                    </Button>
+                    <Button
+                        onClick={handleCloseAuthDialog}
+                    >
+                        На главную
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -24,7 +24,7 @@ const Saved: React.FC = () => {
         <Layout pagename="Сохранённое">
             <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <MuiTypography variant="h4" gutterBottom>
-                    Сохранённые товары
+                    Сохранённые товары ({savedProducts?.length})
                 </MuiTypography>
                 <Grid container spacing={4}>
                     {savedProducts.length > 0 ? savedProducts.map(product => (
@@ -72,11 +72,11 @@ const Saved: React.FC = () => {
 
             <Container maxWidth="xl" style={{ marginTop: '2rem' }}>
                 <MuiTypography variant="h4" gutterBottom>
-                    Приобретённые товары
+                    Приобретённые товары ({boughtProducts?.length})
                 </MuiTypography>
                 <Grid container direction="column" spacing={2}>
                     {boughtProducts.length ? (
-                        boughtProducts.map(({ id, image, name, description, price }) => (
+                        boughtProducts.map(({ id, image, name, price }) => (
                             <Grid item key={id}>
                                 <Card sx={{ display: 'flex', alignItems: 'center', padding: '8px' }}>
                                     <CardMedia
@@ -87,9 +87,6 @@ const Saved: React.FC = () => {
                                     />
                                     <Box sx={{ flexGrow: 1 }}>
                                         <MuiTypography variant="subtitle1">{name}</MuiTypography>
-                                        <MuiTypography variant="body2" color="textSecondary">
-                                            {description}
-                                        </MuiTypography>
                                     </Box>
                                     <MuiTypography variant="h6" sx={{ marginLeft: '16px' }}>
                                         {price}
