@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
                     onChange={(e) => setSearchFieldValue(e.target.value)}
                     sx={{ mr: 1 }}
                 />
-                <IconButton color="inherit" onClick={handleChangeIsSearchButtonClicked}>
+                <IconButton disabled={!searchFieldValue} color="inherit" onClick={handleChangeIsSearchButtonClicked}>
                     <Search />
                 </IconButton>
             </Box>
