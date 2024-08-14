@@ -24,7 +24,11 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
     return (
         <>
             <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-                Sub2Soft | {pagename}
+                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    Sub2Soft
+                </Link>
+                {" | "}
+                {pagename}
             </Typography>
             <Box sx={{ display: { sm: 'flex' }, justifyContent: 'center' }}>
                 <InputBase

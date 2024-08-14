@@ -255,7 +255,7 @@ const BuySoft: React.FC = () => {
                 </DialogActions>
             </Dialog>
 
-            {/* Диалоговое окно авторизации */}
+            {/* Notification about unauthorisation. */}
             <Dialog
                 open={openAuthDialog}
                 onClose={handleCloseAuthDialog}
@@ -269,6 +269,11 @@ const BuySoft: React.FC = () => {
                         onClick={() => navigate('/profile')}
                     >
                         Войти
+                    </Button>
+                    <Button 
+                        onClick={() => navigate(`/item/${product?.name}`)}
+                    >
+                        Назад
                     </Button>
                     <Button
                         onClick={handleCloseAuthDialog}
