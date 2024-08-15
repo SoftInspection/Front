@@ -231,7 +231,7 @@ const BuySoft: React.FC = () => {
                     message='Покупка состоялась.'
                 />
 
-                {/* Диалоговое окно ошибки */}
+                {/* Notification that user has no enough tokens on it's balance. */}
                 <Dialog
                     open={openErrorDialog}
                     onClose={handleCloseErrorDialog}
