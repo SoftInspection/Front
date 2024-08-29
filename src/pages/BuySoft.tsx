@@ -28,7 +28,7 @@ const BuySoft: React.FC = () => {
     const [openErrorDialog, setOpenErrorDialog] = useState(false); // To show the error that user has no enough tokens. 
     const [openAuthDialog, setOpenAuthDialog] = useState(storedLoggedIn !== 'true'); // Show dialog if not logged in
 
-    // Получаем баланс из localStorage
+    // Getting the balance from localStorage
     const [balance, setBalance] = useState<number>(0);
 
     useEffect(() => {
@@ -42,18 +42,18 @@ const BuySoft: React.FC = () => {
 
     const handleNext = () => {
         if (product) {
-            // Проверяем, хватает ли токенов для покупки
+            // Check for balance.
             if (balance < product?.price) {
-                setOpenErrorDialog(true); // Открываем диалог об ошибке
+                setOpenErrorDialog(true); // Open dialog that user has no enough tokens.
             } else if (activeStep === steps.length - 1) {
                 setPurchaseComplete(true);
 
-                // Обновляем баланс и сохраняем его в localStorage
+                // Updating the balance and saving it in localStorage.
                 const newBalance = balance - product.price;
                 localStorage.setItem('balance', newBalance.toString());
                 setBalance(newBalance);
 
-                // Добавляем купленный продукт в localStorage
+                // Adding the product in localStorage.
                 const boughtProducts = JSON.parse(localStorage.getItem('boughtProducts') || '[]');
                 boughtProducts.push({
                     id: product.id,
