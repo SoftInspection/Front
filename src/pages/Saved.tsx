@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Typography as MuiTypography, Card, Box, CardMedia, CardContent, CardActions, Button, Grid } from '@mui/material';
+import { Container, Typography as MuiTypography, Card, Box, CardMedia, CardActionArea, CardContent, CardActions, Button, Grid } from '@mui/material';
 import Layout from './general_components/Layout';
+import { useNavigate } from "react-router-dom";
 import Product from './general_components/Product';
 import { useSavedProducts } from './context/SavedProductsContext';
 
@@ -13,6 +14,12 @@ const Saved: React.FC = () => {
     const boughtProducts: Product[] = JSON.parse(localStorage.getItem('boughtProducts') || '[]'); // List of products user bought in stock.
 
     const { updateSavedCount } = useSavedProducts(); // To show number of saved products above the shopping cart icon. :)
+
+    const navigate = useNavigate();
+
+    const handleCardClick = (productName: string) => {
+        navigate(`/item/${productName}`);
+    }
 
     const handleRemoveFromSaved = (id: number) => {
         const updatedProducts = savedProducts.filter(product => product.id !== id);
@@ -31,35 +38,37 @@ const Saved: React.FC = () => {
                         savedProducts.map(product => (
                             <Grid item xs={12} sm={6} md={4} key={product.id}>
                                 <Card sx={{ display: 'flex', flexDirection: 'column', boxShadow: 3 }}>
-                                    <CardMedia
-                                        component="img"
-                                        height="200"
-                                        image={product.image}
-                                        alt={product.name}
-                                        sx={{ objectFit: 'cover' }}
-                                    />
-                                    <CardContent>
-                                        <MuiTypography gutterBottom variant="h5">
-                                            {product.name}
-                                        </MuiTypography>
-                                        <MuiTypography variant="body2" color="text.secondary">
-                                            {truncateDescription(product.description, 60)}
-                                        </MuiTypography>
-                                        <MuiTypography variant="body2" color="text.primary">
-                                            Цена: ${product.price}
-                                        </MuiTypography>
-                                        <MuiTypography variant="body2" color="text.secondary">
-                                            Категория: {product.category}
-                                        </MuiTypography>
-                                        <MuiTypography variant="body2" color="text.secondary">
-                                            {product.stock ? "В наличии" : "Не в наличии"}
-                                        </MuiTypography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" color="primary" onClick={() => handleRemoveFromSaved(product.id)}>
-                                            Удалить из сохранённого
-                                        </Button>
-                                    </CardActions>
+                                    <CardActionArea onClick={() => handleCardClick(product.name)}>
+                                        <CardMedia
+                                            component="img"
+                                            height="200"
+                                            image={product.image}
+                                            alt={product.name}
+                                            sx={{ objectFit: 'cover' }}
+                                        />
+                                        <CardContent>
+                                            <MuiTypography gutterBottom variant="h5">
+                                                {product.name}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                {truncateDescription(product.description, 60)}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.primary">
+                                                Цена: ${product.price}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                Категория: {product.category}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                {product.stock ? "В наличии" : "Не в наличии"}
+                                            </MuiTypography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small" color="primary" onClick={() => handleRemoveFromSaved(product.id)}>
+                                                Удалить из сохранённого
+                                            </Button>
+                                        </CardActions>
+                                    </CardActionArea>
                                 </Card>
                             </Grid>
                         ))
