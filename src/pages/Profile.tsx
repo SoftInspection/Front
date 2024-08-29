@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Paper, Button, Container, TextField, Typography, Stepper, Step, StepLabel } from '@mui/material';
+import { Link } from "react-router-dom";
 import Layout from './general_components/Layout';
 
 const Profile: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [email, setEmail] = useState('');
-    // const [verificationCode, setVerificationCode] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isCardAvailable, setIsCardAvailable] = useState<boolean>(false);
+    const [balance, setBalance] = useState<number>(0);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [isPasswordRelevant, setIsPasswordRelevant] = useState<boolean>(true); // Checks the password on demandings (more than 7 characters and are there LETTRS and DIGITS.)
+    const [isPasswordRelevant, setIsPasswordRelevant] = useState<boolean>(true);
 
     const steps = ['Введите электронную почту', 'Создайте логин и пароль'];
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        const storedBalance = localStorage.getItem('balance');
+        const storedCardExists = localStorage.getItem('isCardExists');
 
         if (storedUsername && storedIsLoggedIn === 'true') {
             setUsername(storedUsername);
             setIsLoggedIn(true);
         }
+        
+        setIsCardAvailable(storedCardExists === 'true');
+        if (storedBalance) {
+            setBalance(parseFloat(storedBalance));
+        }
     }, []);
 
     const handleChangeIsLoggedIn = () => {
-        if (password.length >= 7 &&              // Checks for length (can't be less than 7 characters).
-            /[a-zA-Z]/.test(password) &&         // Checks for letters availability.
-            /[0-9]/.test(password)) {            // Check for digits availability.
+        if (password.length >= 7 && /[a-zA-Z]/.test(password) && /[0-9]/.test(password)) {
             setIsPasswordRelevant(true);
             setIsLoggedIn(!isLoggedIn);
             if (!isLoggedIn) {
@@ -53,6 +60,8 @@ const Profile: React.FC = () => {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('username');
         localStorage.removeItem('email');
+        localStorage.removeItem('balance');
+        localStorage.removeItem('isCardExists');
         setIsLoggedIn(false);
         setUsername('');
         setEmail('');
@@ -149,7 +158,6 @@ const Profile: React.FC = () => {
                                             onClick={activeStep === steps.length - 1 ? handleChangeIsLoggedIn : handleNext}
                                             disabled={
                                                 (activeStep === 0 && !email) ||
-                                                // (activeStep === 1 && !verificationCode) ||
                                                 (activeStep === 1 && (!username || !password))
                                             }
                                         >
@@ -191,7 +199,16 @@ const Profile: React.FC = () => {
                                                 Баланс:
                                             </Typography>
                                             <Typography variant="body1">
-                                                0 токенов
+                                                {
+                                                    !isCardAvailable ? 
+                                                    <React.Fragment>
+                                                        <Typography variant="body1" component={Link} to="/add+new+card">Карта не привязана. ПРИВЯЗАТЬ</Typography>
+                                                    </React.Fragment> : 
+                                                    <React.Fragment>
+                                                        <Typography variant="body1">{balance} токенов</Typography>
+                                                        <Typography variant="body1" component={Link} to="/deposit">Пополнить баланс</Typography>
+                                                    </React.Fragment>
+                                                }
                                             </Typography>
                                         </Box>
                                         <Button

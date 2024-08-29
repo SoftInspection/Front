@@ -19,8 +19,9 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
     const navigate = useNavigate();
 
     const handleChangeIsSearchButtonClicked = () => {
-        setIsSearchButtonClicked(true);
+        setIsSearchButtonClicked(true);     
         navigate("/", { state: { searchFor: searchFieldValue } }); // Searching for products with name contains textfield's value.
+        console.log(`Search completed: result ${isSearchButtonClicked}`);
         setIsSearchButtonClicked(false);
     }
 
