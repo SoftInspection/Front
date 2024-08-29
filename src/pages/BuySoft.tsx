@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
     Box, Button, Stepper, Step, StepLabel, TextField,
@@ -12,7 +12,6 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import PRODUCTS from "../external_data/Products";
 import { motion } from 'framer-motion';
 import buySoftTheme from "./general_components/Styles/BuySoftTheme";
-
 
 const BuySoft: React.FC = () => {
     const { name } = useParams<{ name: string }>();
@@ -29,21 +28,32 @@ const BuySoft: React.FC = () => {
     const [openErrorDialog, setOpenErrorDialog] = useState(false); // To show the error that user has no enough tokens. 
     const [openAuthDialog, setOpenAuthDialog] = useState(storedLoggedIn !== 'true'); // Show dialog if not logged in
 
-    //! DEMO TOKENS (DEMONSTRATION BALANCE)
-    const balance: number = 600;
-    //! --------
+    // Получаем баланс из localStorage
+    const [balance, setBalance] = useState<number>(0);
+
+    useEffect(() => {
+        const storedBalance = localStorage.getItem('balance');
+        if (storedBalance) {
+            setBalance(parseInt(storedBalance, 10));
+        }
+    }, []);
 
     const steps = ['Подтвердите выбор', 'Введите ключ', 'Подтвердите покупку'];
 
     const handleNext = () => {
         if (product) {
-            // Checking if number of tokens allows user to buy
+            // Проверяем, хватает ли токенов для покупки
             if (balance < product?.price) {
-                setOpenErrorDialog(true); // Dialog that user has no enough tokens.
+                setOpenErrorDialog(true); // Открываем диалог об ошибке
             } else if (activeStep === steps.length - 1) {
                 setPurchaseComplete(true);
 
-                // Creating new local storage if product will be bought.
+                // Обновляем баланс и сохраняем его в localStorage
+                const newBalance = balance - product.price;
+                localStorage.setItem('balance', newBalance.toString());
+                setBalance(newBalance);
+
+                // Добавляем купленный продукт в localStorage
                 const boughtProducts = JSON.parse(localStorage.getItem('boughtProducts') || '[]');
                 boughtProducts.push({
                     id: product.id,
