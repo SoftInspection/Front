@@ -171,7 +171,6 @@ const Profile: React.FC = () => {
                 </Container>) :
                 (
                     <Container>
-                        <Layout pagename={username}>
                             <Container maxWidth="sm">
                                 {isLoggedIn ? (
                                     <Paper sx={{ padding: 4, marginTop: 4 }}>
@@ -229,7 +228,6 @@ const Profile: React.FC = () => {
                                     </Paper>
                                 )}
                             </Container>
-                        </Layout>
                     </Container>
                 )}
         </Layout>

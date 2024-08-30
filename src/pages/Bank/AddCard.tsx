@@ -8,7 +8,7 @@ import {
     Grid,
     Box,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../general_components/Layout';
 
 const AddCard: React.FC = () => {

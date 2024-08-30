@@ -26,12 +26,6 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
         }
     }
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    }
-
     return (
         <AppBar position="static" color="default" elevation={2}>
             <Container maxWidth="lg">
@@ -56,7 +50,6 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
                             placeholder="Search here..."
                             value={searchFieldValue}
                             onChange={(e) => setSearchFieldValue(e.target.value)}
-                            onKeyDown={handleKeyDown}
                             sx={{
                                 ml: 1,
                                 pl: 2,
