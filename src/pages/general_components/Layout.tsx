@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { styled, ThemeProvider, useTheme } from '@mui/material/styles';
-import { Drawer, CssBaseline, Box, Toolbar, List, Divider, IconButton } from "@mui/material";
+import { Drawer, CssBaseline, Box, Toolbar, List, Divider, IconButton, ListItemText } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -8,9 +8,12 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import KeyIcon from '@mui/icons-material/Key';
+import HomeIcon from '@mui/icons-material/Home';
+import ApiIcon from '@mui/icons-material/Api';
+import SaveIcon from '@mui/icons-material/Save';
+import SchoolIcon from '@mui/icons-material/School';
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import InfoIcon from '@mui/icons-material/Info';
 import Typography from "@mui/material/Typography";
 import { Link } from 'react-router-dom';
 
@@ -91,7 +94,7 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
             <ThemeProvider theme={darkTheme}>
                 <Box sx={{ display: 'flex' }}>
                     <CssBaseline />
-                    <AppBar position="fixed" open={open}>
+                    <AppBar position="fixed" open={open} sx={{ backgroundColor: '#222' }}>
                         <Toolbar>
                             <IconButton
                                 color="inherit"
@@ -112,10 +115,9 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                             '& .MuiDrawer-paper': {
                                 width: drawerWidth,
                                 boxSizing: 'border-box',
-                                // backgroundColor: theme.palette.background.paper,
-                                backgroundColor: "#343434",
-                                // color: theme.palette.text.primary,
-                                color: "white"
+                                backgroundColor: "#2E2E2E",
+                                color: "#FFFFFF",
+                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
                             },
                         }}
                         variant="persistent"
@@ -123,24 +125,25 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                         open={open}
                     >
                         <DrawerHeader>
-                            {/* <Typography variant="h6">Sub2Soft</Typography> */}
                             <IconButton onClick={handleDrawerClose}>
                                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                                {/* <ChevronRightIcon /> */}
                             </IconButton>
                         </DrawerHeader>
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
                             {[
-                                { text: "Главная", link: "/" },
-                                { text: 'API', link: '/api' },
-                            ].map((item, index) => (
+                                { text: "Главная", link: "/", icon: <HomeIcon /> },
+                                { text: 'API', link: '/api', icon: <ApiIcon /> },
+                            ].map((item) => (
                                 <ListItem key={item.text} disablePadding>
-                                    <ListItemButton component={Link} to={item.link}>
+                                    <ListItemButton component={Link} to={item.link} sx={{ '&:hover': { backgroundColor: '#424242' } }}>
                                         <ListItemIcon sx={{ color: theme.palette.text.primary }}>
-                                            {index % 2 === 0 ? <KeyIcon /> : <MailIcon />}
+                                            {item.icon}
                                         </ListItemIcon>
-                                        <p>{item.text}</p>
+                                        <ListItemText
+                                            primary={<Typography variant="body1" color="inherit">{item.text}</Typography>}
+                                            sx={{ marginLeft: -2 }}
+                                        />
                                     </ListItemButton>
                                 </ListItem>
                             ))}
@@ -148,17 +151,20 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                         <Divider sx={{ backgroundColor: theme.palette.divider }} />
                         <List>
                             {[
-                                { text: 'Сохранённое', link: '/saved' },
-                                { text: 'Инструктаж', link: '/instruction' },
-                                { text: 'Feedback', link: '/feedback' },
-                                { text: 'О нас', link: '/about' },
-                            ].map((item, index) => (
+                                { text: 'Сохранённое', link: '/saved', icon: <SaveIcon /> },
+                                { text: 'Инструктаж', link: '/instruction', icon: <SchoolIcon /> },
+                                { text: 'Feedback', link: '/feedback', icon: <FeedbackIcon /> },
+                                { text: 'О нас', link: '/about', icon: <InfoIcon /> },
+                            ].map((item) => (
                                 <ListItem key={item.text} disablePadding>
-                                    <ListItemButton component={Link} to={item.link}>
+                                    <ListItemButton component={Link} to={item.link} sx={{ '&:hover': { backgroundColor: '#424242' } }}>
                                         <ListItemIcon sx={{ color: theme.palette.text.primary }}>
-                                            {index % 2 === 0 ? <MailIcon /> : <InboxIcon />}
+                                            {item.icon}
                                         </ListItemIcon>
-                                        <p>{item.text}</p>
+                                        <ListItemText
+                                            primary={<Typography variant="body1" color="inherit">{item.text}</Typography>}
+                                            sx={{ marginLeft: -2 }}
+                                        />
                                     </ListItemButton>
                                 </ListItem>
                             ))}

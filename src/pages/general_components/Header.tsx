@@ -13,7 +13,9 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
     const { savedCount } = useSavedProducts();
 
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const balance = localStorage.getItem('balance');
+    const balanceString = localStorage.getItem('balance');
+    const checkedBalance = balanceString ? parseFloat(balanceString) : 0;
+    const balance = checkedBalance.toFixed(2);
 
     const navigate = useNavigate();
 
@@ -21,6 +23,12 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
         if (searchFieldValue.trim()) {
             navigate("/", { state: { searchFor: searchFieldValue } });
             setSearchFieldValue("");
+        }
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSearch();
         }
     }
 
@@ -48,6 +56,7 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
                             placeholder="Search here..."
                             value={searchFieldValue}
                             onChange={(e) => setSearchFieldValue(e.target.value)}
+                            onKeyDown={handleKeyDown}
                             sx={{
                                 ml: 1,
                                 pl: 2,

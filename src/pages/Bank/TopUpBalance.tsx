@@ -56,7 +56,6 @@ const TopUpBalance: React.FC = () => {
                 type="number"
                 value={amount}
                 onChange={handleAmountChange}
-                InputProps={{ inputProps: { min: 0 } }}
               />
               <Button
                 variant="contained"
