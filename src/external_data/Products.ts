@@ -80,7 +80,7 @@ const PRODUCTS: Product[] = [
         "tags": ["Управление задачами", "Организация", "Продуктивность", "Матрица Эйзенхауэра", "Канбан", "Визуализация задач", "Планирование", "Эффективность"],
         "stock": true,
         "image": "https://task-canvas-lake.vercel.app/static/media/logo.db374459f9d768262a28.png"
-    },    
+    },
     {
         id: 9,
         name: 'Uniswap Token (UNI)',

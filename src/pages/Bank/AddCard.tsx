@@ -56,15 +56,15 @@ const AddCard: React.FC = () => {
 
         if (isCardNumberValid && isExpiryDateValid && isCvvValid && cardholderName.trim() !== '') {
             // Valid card, perform submission logic
-            console.log('Card Number:', cardNumber);
-            console.log('Expiry Date:', expiryDate);
+            console.log('Номер карты:', cardNumber);
+            console.log('Срок действия:', expiryDate);
             console.log('CVV:', cvv);
-            console.log('Cardholder Name:', cardholderName);
+            console.log('Имя держателя карты:', cardholderName);
         }
 
         if (isCardNumberValid && isExpiryDateValid && isCvvValid && cardholderName.trim() !== '') {
             localStorage.setItem('isCardExists', 'true');
-         
+
             navigate('/profile');
         }
     };
@@ -102,15 +102,15 @@ const AddCard: React.FC = () => {
     };
 
     return (
-        <Layout pagename={`ПРИВЯЗКА НОВОЙ КАРТЫ: ${cardholderName}`}>
+        <Layout pagename={`НОВАЯ КАРТА`}>
             <Card sx={{ maxWidth: 400, margin: '0 auto', padding: 2 }}>
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
-                        Add New Card
+                        Привязка новой карты
                     </Typography>
                     <Box component="form" noValidate autoComplete="off">
                         <TextField
-                            label="Card Number"
+                            label="Номер карты"
                             variant="outlined"
                             fullWidth
                             margin="normal"
@@ -118,18 +118,18 @@ const AddCard: React.FC = () => {
                             onChange={handleCardNumberChange}
                             inputProps={{ maxLength: 19 }} // 16 digits + 3 spaces = 19 characters
                             error={errors.cardNumber}
-                            helperText={errors.cardNumber ? 'Invalid card number' : ''}
+                            helperText={errors.cardNumber ? 'Неверный код карты' : ''}
                         />
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
                                 <TextField
-                                    label="Expiry Date (MM/YY)"
+                                    label="Срок действия (MM/YY)"
                                     variant="outlined"
                                     fullWidth
                                     value={expiryDate}
                                     onChange={handleExpiryDateChange}
                                     error={errors.expiryDate}
-                                    helperText={errors.expiryDate ? 'Invalid expiry date' : ''}
+                                    helperText={errors.expiryDate ? 'Неверный срок действия' : ''}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -140,19 +140,19 @@ const AddCard: React.FC = () => {
                                     value={cvv}
                                     onChange={handleCvvChange}
                                     error={errors.cvv}
-                                    helperText={errors.cvv ? 'Invalid CVV' : ''}
+                                    helperText={errors.cvv ? 'Неверный CVV' : ''}
                                 />
                             </Grid>
                         </Grid>
                         <TextField
-                            label="Cardholder Name"
+                            label="Имя держателя"
                             variant="outlined"
                             fullWidth
                             margin="normal"
                             value={cardholderName}
                             onChange={handleCardholderNameChange}
                             error={errors.cardholderName}
-                            helperText={errors.cardholderName ? 'Cardholder name is required' : ''}
+                            helperText={errors.cardholderName ? 'Требуется имя держателя' : ''}
                         />
                         <Button
                             variant="contained"
@@ -161,7 +161,7 @@ const AddCard: React.FC = () => {
                             sx={{ marginTop: 2 }}
                             onClick={handleAddCard}
                         >
-                            Add Card
+                            ДОБАВИТЬ КАРТУ
                         </Button>
                     </Box>
                 </CardContent>

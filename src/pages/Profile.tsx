@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
             setUsername(storedUsername);
             setIsLoggedIn(true);
         }
-        
+
         setIsCardAvailable(storedCardExists === 'true');
         if (storedBalance) {
             setBalance(parseFloat(storedBalance));
@@ -171,63 +171,63 @@ const Profile: React.FC = () => {
                 </Container>) :
                 (
                     <Container>
-                            <Container maxWidth="sm">
-                                {isLoggedIn ? (
-                                    <Paper sx={{ padding: 4, marginTop: 4 }}>
-                                        <Typography variant="h4" align="center" gutterBottom>
-                                            Профиль пользователя
+                        <Container maxWidth="sm">
+                            {isLoggedIn ? (
+                                <Paper sx={{ padding: 4, marginTop: 4 }}>
+                                    <Typography variant="h4" align="center" gutterBottom>
+                                        Профиль пользователя
+                                    </Typography>
+                                    <Box sx={{ marginY: 2 }}>
+                                        <Typography variant="h6">
+                                            Логин:
                                         </Typography>
-                                        <Box sx={{ marginY: 2 }}>
-                                            <Typography variant="h6">
-                                                Логин:
-                                            </Typography>
-                                            <Typography variant="body1">
-                                                {username}
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ marginY: 2 }}>
-                                            <Typography variant="h6">
-                                                Статус профиля:
-                                            </Typography>
-                                            <Typography variant="body1">
-                                                Пользователь
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ marginY: 2 }}>
-                                            <Typography variant="h6">
-                                                Баланс:
-                                            </Typography>
-                                            <Typography variant="body1">
-                                                {
-                                                    !isCardAvailable ? 
+                                        <Typography variant="body1">
+                                            {username}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ marginY: 2 }}>
+                                        <Typography variant="h6">
+                                            Статус профиля:
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            Пользователь
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ marginY: 2 }}>
+                                        <Typography variant="h6">
+                                            Баланс:
+                                        </Typography>
+                                        <Typography variant="body1">
+                                            {
+                                                !isCardAvailable ?
                                                     <React.Fragment>
                                                         <Typography variant="body1" component={Link} to="/add+new+card">Карта не привязана. ПРИВЯЗАТЬ</Typography>
-                                                    </React.Fragment> : 
+                                                    </React.Fragment> :
                                                     <React.Fragment>
                                                         <Typography variant="body1">{balance} токенов</Typography>
                                                         <Typography variant="body1" component={Link} to="/deposit">Пополнить баланс</Typography>
                                                     </React.Fragment>
-                                                }
-                                            </Typography>
-                                        </Box>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            fullWidth
-                                            onClick={handleLogout}
-                                            sx={{ marginTop: 4 }}
-                                        >
-                                            Выйти
-                                        </Button>
-                                    </Paper>
-                                ) : (
-                                    <Paper sx={{ padding: 4, marginTop: 4 }}>
-                                        <Typography variant="h5" align="center">
-                                            Пожалуйста, войдите в систему.
+                                            }
                                         </Typography>
-                                    </Paper>
-                                )}
-                            </Container>
+                                    </Box>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        fullWidth
+                                        onClick={handleLogout}
+                                        sx={{ marginTop: 4 }}
+                                    >
+                                        Выйти
+                                    </Button>
+                                </Paper>
+                            ) : (
+                                <Paper sx={{ padding: 4, marginTop: 4 }}>
+                                    <Typography variant="h5" align="center">
+                                        Пожалуйста, войдите в систему.
+                                    </Typography>
+                                </Paper>
+                            )}
+                        </Container>
                     </Container>
                 )}
         </Layout>

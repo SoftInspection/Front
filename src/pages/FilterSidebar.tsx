@@ -53,6 +53,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
             <Button
                 onClick={() => setShowAllFilters(!showAllFilters)}
                 variant="text"
+                sx={{ mb: 2, textTransform: 'none' }}
             >
                 {showAllFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
             </Button>
@@ -63,7 +64,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         onClick={() => setOpenFilters(!openFilters)}
                         fullWidth
                         variant="outlined"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, textTransform: 'none' }}
                     >
                         Категория
                     </Button>
@@ -83,6 +84,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                                     key={category}
                                     control={<Checkbox onChange={(e) => onCategoryChange(category, e.target.checked)} />}
                                     label={category}
+                                    sx={{ mb: 0.5 }}
                                 />
                             ))}
                         </Box>
@@ -92,7 +94,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         onClick={() => setOpenTags(!openTags)}
                         fullWidth
                         variant="outlined"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, textTransform: 'none' }}
                     >
                         Теги
                     </Button>
@@ -112,6 +114,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                                     key={tag}
                                     control={<Checkbox onChange={(e) => onTagChange(tag, e.target.checked)} />}
                                     label={tag}
+                                    sx={{ mb: 0.5 }}
                                 />
                             ))}
                         </Box>
@@ -121,16 +124,30 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         onClick={() => setOpenPrice(!openPrice)}
                         fullWidth
                         variant="outlined"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, textTransform: 'none' }}
                     >
                         Цена
                     </Button>
                     <Collapse in={openPrice}>
                         <Box sx={{ p: 1 }}>
-                            <Typography variant="body2">Цена от:</Typography>
-                            <input type="number" placeholder="Минимум" onChange={(e) => onPriceChange(Number(e.target.value), null)} />
-                            <Typography variant="body2">До:</Typography>
-                            <input type="number" placeholder="Максимум" onChange={(e) => onPriceChange(null, Number(e.target.value))} />
+                            <Typography variant="body2" sx={{ mb: 0.5 }}>Цена от:</Typography>
+                            <TextField
+                                type="number"
+                                placeholder="Минимум"
+                                onChange={(e) => onPriceChange(Number(e.target.value), null)}
+                                variant="outlined"
+                                size="small"
+                                sx={{ mb: 1 }}
+                            />
+                            <Typography variant="body2" sx={{ mb: 0.5 }}>До:</Typography>
+                            <TextField
+                                type="number"
+                                placeholder="Максимум"
+                                onChange={(e) => onPriceChange(null, Number(e.target.value))}
+                                variant="outlined"
+                                size="small"
+                                sx={{ mb: 1 }}
+                            />
                         </Box>
                     </Collapse>
 
@@ -138,7 +155,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         onClick={() => setOpenAvailability(!openAvailability)}
                         fullWidth
                         variant="outlined"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, textTransform: 'none' }}
                     >
                         В наличии
                     </Button>
@@ -147,6 +164,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                             <FormControlLabel
                                 control={<Checkbox onChange={(e) => onAvailabilityChange(e.target.checked)} />}
                                 label="В наличии"
+                                sx={{ mb: 0.5 }}
                             />
                             <FormControlLabel
                                 control={<Checkbox onChange={(e) => onAvailabilityChange(!e.target.checked)} />}
@@ -161,7 +179,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         variant="contained"
                         color="primary"
                         fullWidth
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, textTransform: 'none' }}
                         onClick={() => setShowAllFilters(!showAllFilters)}
                     >
                         Применить
@@ -170,6 +188,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                         variant="outlined"
                         color="error"
                         fullWidth
+                        sx={{ textTransform: 'none' }}
                         onClick={onClearFilters}
                     >
                         Очистить фильтры
