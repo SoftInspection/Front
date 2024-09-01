@@ -158,6 +158,23 @@ const About: React.FC = () => {
                         Если у вас есть вопросы или предложения, пожалуйста, <Typography color="secondary" component={Link} to="/feedback">свяжитесь с нами</Typography>! Мы всегда рады помочь!
                     </Typography>
                 </Box>
+                {/* FOOTER */}
+                <Box
+                    sx={{
+                        width: '100%',
+                        padding: 2,
+                        backgroundColor: 'black',
+                        textAlign: 'center',
+                        marginTop: 'auto',
+                    }}
+                >
+                    <Typography variant="body2" color="textSecondary">
+                        Этот проект был создан исключительно для демонстрации способностей разработчиков и является демонстрационным и свободным для пользования. Он не предназначен для коммерческого использования (мы не несём ответственности за результаты любой работы с Sub2Soft&copy;) и не обязан являться полностью функциональным продуктом.
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{ marginTop: 1 }}>
+                        © 2024 SoftInspection, разработчики Sub2Soft.
+                    </Typography>
+                </Box>
             </Container>
         </Layout>
     );
