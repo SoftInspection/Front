@@ -135,7 +135,7 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                             {[
                                 { text: "Главная", link: "/", icon: <HomeIcon /> },
                                 { text: 'Профиль', link: '/profile', icon: <AccountCircle /> },
-                                { text: 'История трат', link: '/transactions', icon: <AccountBalanceIcon /> }
+                                { text: 'История тран-ций', link: '/transactions', icon: <AccountBalanceIcon /> }
                             ].map((item) => (
                                 <ListItem key={item.text} disablePadding>
                                     <ListItemButton component={Link} to={item.link} sx={{ '&:hover': { backgroundColor: '#424242' } }}>

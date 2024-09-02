@@ -82,7 +82,7 @@ const BuySoft: React.FC = () => {
     const saveTransactionToLocalStorage = (amount: number) => {
         const transaction = {
             id: new Date().getTime(), // Unique ID based on the current time
-            type: 'purchase',
+            type: 'expense',
             amount: -amount, // negative to reflect spending
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
