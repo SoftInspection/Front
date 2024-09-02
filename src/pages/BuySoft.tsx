@@ -64,6 +64,9 @@ const BuySoft: React.FC = () => {
                 });
                 localStorage.setItem('boughtProducts', JSON.stringify(boughtProducts));
 
+                // Save transaction details
+                saveTransactionToLocalStorage(product.price);
+
                 setTimeout(() => {
                     setOpenSnackbar(true);
                     setPurchaseComplete(false);
@@ -74,6 +77,24 @@ const BuySoft: React.FC = () => {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
             }
         }
+    };
+
+    const saveTransactionToLocalStorage = (amount: number) => {
+        const transaction = {
+            id: new Date().getTime(), // Unique ID based on the current time
+            type: 'purchase',
+            amount: -amount, // negative to reflect spending
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            description: `Покупка продукта: ${product?.name}`,
+        };
+
+        const storedTransactions = localStorage.getItem('transactions');
+        let transactions = storedTransactions ? JSON.parse(storedTransactions) : [];
+
+        transactions.push(transaction);
+
+        localStorage.setItem('transactions', JSON.stringify(transactions));
     };
 
     const handleBack = () => {

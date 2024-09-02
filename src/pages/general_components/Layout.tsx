@@ -9,7 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
-import ApiIcon from '@mui/icons-material/Api';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import SaveIcon from '@mui/icons-material/Save';
 import SchoolIcon from '@mui/icons-material/School';
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 
 import Header from "./Header";
 import darkTheme from './Styles/LayoutTheme';
+import { AccountCircle } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -133,7 +134,8 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                         <List>
                             {[
                                 { text: "Главная", link: "/", icon: <HomeIcon /> },
-                                { text: 'API', link: '/api', icon: <ApiIcon /> },
+                                { text: 'Профиль', link: '/profile', icon: <AccountCircle /> },
+                                { text: 'История трат', link: '/transactions', icon: <AccountBalanceIcon /> }
                             ].map((item) => (
                                 <ListItem key={item.text} disablePadding>
                                     <ListItemButton component={Link} to={item.link} sx={{ '&:hover': { backgroundColor: '#424242' } }}>

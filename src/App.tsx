@@ -17,6 +17,7 @@ import { SavedProductsProvider } from "./pages/context/SavedProductsContext";
 import './App.css';
 import BuySoft from "./pages/BuySoft";
 import TopUpBalance from "./pages/Bank/TopUpBalance";
+import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
   //! ADMINISTRATOR STATUS.
@@ -37,6 +38,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add+new+card" element={<AddCard />} />
             <Route path="/deposit" element={<TopUpBalance />} />
+            <Route path="/transactions" element={<TransactionHistory /> } />
             <Route path="/item/:name" element={<ProductPage />} />
             <Route path="/buy/:name" element={<BuySoft />} />
             <Route path="*" element={<UndefinedAddress />} />

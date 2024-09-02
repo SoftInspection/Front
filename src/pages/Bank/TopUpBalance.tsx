@@ -14,6 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Layout from '../general_components/Layout';
 import { InfoOutlined } from '@mui/icons-material';
+import { addTransaction, Transaction } from '../../Services/transactionService';
 
 const TopUpBalance: React.FC = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -47,14 +48,27 @@ const TopUpBalance: React.FC = () => {
       setError(null);
       setSuccess(null);
       try {
-        // Simulate a network request
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // The simulation of network.
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const newBalance = balance + amount;
         setBalance(newBalance);
         localStorage.setItem('balance', newBalance.toString());
+
+        // New transaction.
+        const now = new Date();
+        const newTransaction: Transaction = {
+          id: Date.now(), // Using timestamp as unique ID.
+          type: 'deposit',
+          amount: amount,
+          date: now.toISOString().split('T')[0], // YYYY-MM-DD
+          time: now.toTimeString().split(' ')[0], // HH:MM:SS
+          description: 'Пополнение баланса',
+        };
+        addTransaction(newTransaction);
+
         setSuccess('Баланс успешно пополнен!');
-        setAmount(0); // Reset the amount field
+        setAmount(0);
         navigate('/profile');
       } catch (error) {
         setError('Произошла ошибка при пополнении баланса. Попробуйте ещё раз.');
@@ -69,9 +83,18 @@ const TopUpBalance: React.FC = () => {
   return (
     <Layout pagename="Пополнение баланса">
       <Container maxWidth="sm">
-        <Paper sx={{ padding: 4, marginTop: 4, borderRadius: 2, boxShadow: 3 }}>
+        <Paper
+          sx={{
+            padding: 4,
+            marginTop: 4,
+            borderRadius: 2,
+            boxShadow: 3,
+            backgroundColor: '#2c2c2c',
+            color: '#f0f0f0',
+          }}
+        >
           <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography variant="h4" align="center" gutterBottom sx={{ color: '#90caf9', fontWeight: 'bold' }}>
               Пополнение баланса
             </Typography>
             <Typography variant="h6" align="center" gutterBottom>
@@ -96,7 +119,7 @@ const TopUpBalance: React.FC = () => {
                   value={amount}
                   onChange={handleAmountChange}
                   InputProps={{
-                    inputProps: { min: 0 }
+                    inputProps: { min: 0 },
                   }}
                 />
                 <Button
@@ -104,7 +127,11 @@ const TopUpBalance: React.FC = () => {
                   color="primary"
                   fullWidth
                   onClick={handleTopUp}
-                  sx={{ marginTop: 2, borderRadius: 1, height: 50 }}
+                  sx={{
+                    marginTop: 2,
+                    borderRadius: 1,
+                    height: 50,
+                  }}
                   disabled={loading}
                 >
                   {loading ? <CircularProgress size={24} /> : 'Пополнить'}
@@ -121,9 +148,9 @@ const TopUpBalance: React.FC = () => {
           open={!!error}
           autoHideDuration={6000}
           onClose={() => setError(null)}
-          message={error}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         >
-          <Alert onClose={() => setError(null)} severity="error">
+          <Alert onClose={() => setError(null)} severity="error" sx={{ width: '100%' }}>
             {error}
           </Alert>
         </Snackbar>
@@ -131,9 +158,9 @@ const TopUpBalance: React.FC = () => {
           open={!!success}
           autoHideDuration={6000}
           onClose={() => setSuccess(null)}
-          message={success}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         >
-          <Alert onClose={() => setSuccess(null)} severity="success">
+          <Alert onClose={() => setSuccess(null)} severity="success" sx={{ width: '100%' }}>
             {success}
           </Alert>
         </Snackbar>
