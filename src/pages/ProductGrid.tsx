@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea } from '@mui/material';
+import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea, Snackbar, Button } from '@mui/material';
 import PRODUCTS from "../external_data/Products";
 import Product from "./general_components/Product";
 
@@ -18,11 +18,34 @@ interface ProductGridProps {
 const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange, availability }) => {
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     const searchFor = location.state?.searchFor ?? "";
+
+    const [compareProducts, setCompareProducts] = useState<Product[]>([]);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const handleCardClick = (productName: string) => {
         navigate(`/item/${productName}`);
+    };
+
+    const handleRightClick = (event: React.MouseEvent, product: Product) => {
+        event.preventDefault();
+        if (compareProducts.length < 2 && !compareProducts.includes(product)) {
+            setCompareProducts(prev => [...prev, product]);
+            setSnackbarOpen(true);
+        }
+    };
+
+    const handleResetComparison = () => {
+        setCompareProducts([]);
+        setSnackbarOpen(false);
+    };
+
+    const handleCompare = () => {
+        if (compareProducts.length === 2) {
+            const [product1, product2] = compareProducts;
+            navigate(`/compare-${product1.name}-vs-${product2.name}`);
+        }
     };
 
     const filteredProducts = PRODUCTS.filter(product => {
@@ -41,39 +64,65 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
     });
 
     return (
-        <Grid container spacing={4}>
-            {filteredProducts.map((product: Product) => (
-                <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <CardActionArea onClick={() => handleCardClick(product.name)}>
-                        <Card>
-                            <CardMedia
-                                component="img"
-                                height="140"
-                                image={product.image}
-                                alt={product.name}
-                            />
-                            <CardContent>
-                                <MuiTypography gutterBottom variant="h5" component="div">
-                                    {product.name}
-                                </MuiTypography>
-                                <MuiTypography variant="body2" color="text.secondary">
-                                    {truncateDescription(product.description, 20)}
-                                </MuiTypography>
-                                <MuiTypography variant="body2" color="text.primary">
-                                    Цена: ${product.price}
-                                </MuiTypography>
-                                <MuiTypography variant="body2" color="text.secondary">
-                                    Категория: {product.category}
-                                </MuiTypography>
-                                <MuiTypography variant="body2" color="text.secondary">
-                                    {product.stock ? "В наличии" : "Не в наличии"}
-                                </MuiTypography>
-                            </CardContent>
-                        </Card>
-                    </CardActionArea>
-                </Grid>
-            ))}
-        </Grid>
+        <>
+            <Grid container spacing={4}>
+                {filteredProducts.map((product: Product) => (
+                    <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                        <CardActionArea
+                            onClick={() => handleCardClick(product.name)}
+                            onContextMenu={(event) => handleRightClick(event, product)}
+                        >
+                            <Card>
+                                <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={product.image}
+                                    alt={product.name}
+                                />
+                                <CardContent>
+                                    <MuiTypography gutterBottom variant="h5" component="div">
+                                        {product.name}
+                                    </MuiTypography>
+                                    <MuiTypography variant="body2" color="text.secondary">
+                                        {truncateDescription(product.description, 20)}
+                                    </MuiTypography>
+                                    <MuiTypography variant="body2" color="text.primary">
+                                        Цена: ${product.price}
+                                    </MuiTypography>
+                                    <MuiTypography variant="body2" color="text.secondary">
+                                        Категория: {product.category}
+                                    </MuiTypography>
+                                    <MuiTypography variant="body2" color="text.secondary">
+                                        {product.stock ? "В наличии" : "Не в наличии"}
+                                    </MuiTypography>
+                                </CardContent>
+                            </Card>
+                        </CardActionArea>
+                    </Grid>
+                ))}
+            </Grid>
+
+            <Snackbar
+                open={snackbarOpen && compareProducts.length > 0}
+                onClose={() => setSnackbarOpen(false)}
+                message={`Товар${compareProducts.length > 1 ? 'а' : ''} добавлен${compareProducts.length > 1 ? 'ы' : ''} к сравнению`}
+                action={
+                    <>
+                        <Button color="secondary" size="small" onClick={handleResetComparison}>
+                            Сбросить
+                        </Button>
+                        <Button
+                            color="primary"
+                            size="small"
+                            onClick={handleCompare}
+                            disabled={compareProducts.length < 2}
+                        >
+                            Перейти к сравнению
+                        </Button>
+                    </>
+                }
+            />
+        </>
     );
 };
 
