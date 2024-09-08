@@ -11,13 +11,14 @@ import FeedbackPage from './pages/Feedback';
 import InstructionForUser from './pages/InstructionForUser';
 import Profile from "./pages/Profile";
 import AddCard from "./pages/Bank/AddCard";
+import CompareProducts from "./pages/CompareProducts";
+import BuySoft from "./pages/BuySoft";
+import TopUpBalance from "./pages/Bank/TopUpBalance";
+import TransactionHistory from "./pages/TransactionHistory";
 
 import { SavedProductsProvider } from "./pages/context/SavedProductsContext";
 
 import './App.css';
-import BuySoft from "./pages/BuySoft";
-import TopUpBalance from "./pages/Bank/TopUpBalance";
-import TransactionHistory from "./pages/TransactionHistory";
 
 function App() {
   //! ADMINISTRATOR STATUS.
@@ -36,6 +37,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/saved" element={<Saved />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/compare" element={<CompareProducts />} />
             <Route path="/add+new+card" element={<AddCard />} />
             <Route path="/deposit" element={<TopUpBalance />} />
             <Route path="/transactions" element={<TransactionHistory /> } />

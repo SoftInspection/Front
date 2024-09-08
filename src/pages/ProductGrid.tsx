@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea, Snackbar, Button } from '@mui/material';
+import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea, Snackbar, Button, Tooltip } from '@mui/material';
 import PRODUCTS from "../external_data/Products";
 import Product from "./general_components/Product";
 
@@ -28,23 +28,25 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
         navigate(`/item/${productName}`);
     };
 
+    // Clicking with right button.
     const handleRightClick = (event: React.MouseEvent, product: Product) => {
         event.preventDefault();
-        if (compareProducts.length < 2 && !compareProducts.includes(product)) {
+        if (compareProducts.length < 2 && !compareProducts.some(p => p.id === product.id)) {
             setCompareProducts(prev => [...prev, product]);
             setSnackbarOpen(true);
         }
     };
 
+    // Empty the list with products to compare. 
     const handleResetComparison = () => {
         setCompareProducts([]);
         setSnackbarOpen(false);
     };
 
+    // Go to comparing component.
     const handleCompare = () => {
         if (compareProducts.length === 2) {
-            const [product1, product2] = compareProducts;
-            navigate(`/compare-${product1.name}-vs-${product2.name}`);
+            navigate('/compare', { state: { products: compareProducts } });
         }
     };
 
@@ -55,7 +57,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
             (priceRange[1] === null || product.price <= priceRange[1]);
         const inAvailability = availability === null || availability === product.stock;
 
-        const matchesSearch = searchFor === "" || 
+        const matchesSearch = searchFor === "" ||
             product.name.toLowerCase().includes(searchFor.toLowerCase()) ||
             product.description.toLowerCase().includes(searchFor.toLowerCase()) ||
             product.category.toLowerCase().includes(searchFor.toLowerCase());
@@ -68,36 +70,44 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
             <Grid container spacing={4}>
                 {filteredProducts.map((product: Product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                        <CardActionArea
-                            onClick={() => handleCardClick(product.name)}
-                            onContextMenu={(event) => handleRightClick(event, product)}
+                        <Tooltip
+                            title={`Нажмите ЛКМ, чтобы перейти к данным о ${product.name}. \n Нажмите ПКМ, чтобы добавить товар в сравнение.`}
+                            placement="top-start"
+                            arrow
                         >
-                            <Card>
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={product.image}
-                                    alt={product.name}
-                                />
-                                <CardContent>
-                                    <MuiTypography gutterBottom variant="h5" component="div">
-                                        {product.name}
-                                    </MuiTypography>
-                                    <MuiTypography variant="body2" color="text.secondary">
-                                        {truncateDescription(product.description, 20)}
-                                    </MuiTypography>
-                                    <MuiTypography variant="body2" color="text.primary">
-                                        Цена: ${product.price}
-                                    </MuiTypography>
-                                    <MuiTypography variant="body2" color="text.secondary">
-                                        Категория: {product.category}
-                                    </MuiTypography>
-                                    <MuiTypography variant="body2" color="text.secondary">
-                                        {product.stock ? "В наличии" : "Не в наличии"}
-                                    </MuiTypography>
-                                </CardContent>
-                            </Card>
-                        </CardActionArea>
+                            <span>
+                                <CardActionArea
+                                    onClick={() => handleCardClick(product.name)}
+                                    onContextMenu={(event) => handleRightClick(event, product)}
+                                >
+                                    <Card>
+                                        <CardMedia
+                                            component="img"
+                                            height="140"
+                                            image={product.image}
+                                            alt={product.name}
+                                        />
+                                        <CardContent>
+                                            <MuiTypography gutterBottom variant="h5" component="div">
+                                                {product.name}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                {truncateDescription(product.description, 20)}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.primary">
+                                                Цена: ${product.price}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                Категория: {product.category}
+                                            </MuiTypography>
+                                            <MuiTypography variant="body2" color="text.secondary">
+                                                {product.stock ? "В наличии" : "Не в наличии"}
+                                            </MuiTypography>
+                                        </CardContent>
+                                    </Card>
+                                </CardActionArea>
+                            </span>
+                        </Tooltip>
                     </Grid>
                 ))}
             </Grid>
