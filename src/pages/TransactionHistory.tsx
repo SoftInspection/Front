@@ -91,7 +91,7 @@ const TransactionHistory: React.FC = () => {
                                             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.3)',
                                         }}
                                     >
-                                        <ListItemAvatar>
+                                        <ListItemAvatar>    
                                             <Avatar sx={{ bgcolor: transaction.type === 'deposit' ? '#4caf50' : '#f44336' }}>
                                                 {transaction.type === 'deposit' ? <ArrowDownward /> : <ArrowUpward />}
                                             </Avatar>
@@ -120,7 +120,7 @@ const TransactionHistory: React.FC = () => {
                                                 <Grid container justifyContent="space-between" sx={{ marginTop: 1 }}>
                                                     <Grid item>
                                                         <Typography variant="body2" sx={{ color: '#b0bec5' }}>
-                                                            {transaction.description}
+                                                            {transaction.description} | ID {transaction.id}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
