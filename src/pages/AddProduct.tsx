@@ -30,7 +30,7 @@ const AddProduct: React.FC = () => {
 
     const categories = ['Софт', 'Вебсайт', 'Бот', 'Спец-токен', 'Ключ', 'Мод', 'Другое'];
 
-    // Загружаем сохраненные товары из localStorage при загрузке компонента
+    // Load myProds from localStorage.
     useEffect(() => {
         const storedProducts = localStorage.getItem('myProducts');
         if (storedProducts) {
