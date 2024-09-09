@@ -28,6 +28,8 @@ const AddProduct: React.FC = () => {
     const navigate = useNavigate();
     const [finalPrice, setFinalPrice] = useState<number>(0); // Result price.
 
+    const isDeveloperMode = localStorage.getItem('isDeveloperMode');
+
     const categories = ['Софт', 'Вебсайт', 'Бот', 'Спец-токен', 'Ключ', 'Мод', 'Другое'];
 
     // Load myProds from localStorage.
@@ -93,8 +95,6 @@ const AddProduct: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Обновляем цену продукта на финальную цену перед отправкой
         const productWithFinalPrice = {
             ...product,
             price: finalPrice
@@ -103,7 +103,7 @@ const AddProduct: React.FC = () => {
         try {
             PRODUCTS.push(productWithFinalPrice);
 
-            // Сохраняем товар в localStorage
+            // Save the product in localstorage.
             const existingProducts = localStorage.getItem('myProducts');
             const updatedProducts = existingProducts ? JSON.parse(existingProducts) : [];
             updatedProducts.push(productWithFinalPrice);
@@ -114,6 +114,43 @@ const AddProduct: React.FC = () => {
             alert("Ошибка при добавлении товара.");
         }
     };
+
+    if (!isDeveloperMode) {
+        return (
+            <Layout pagename="Ограниченный доступ">
+                <Container maxWidth="md" sx={{ mt: 6 }}>
+                    <Card elevation={6} sx={{ borderRadius: 3 }}>
+                        <CardContent>
+                            <Typography variant="h4" color="error" align="center" gutterBottom>
+                                Доступ запрещён
+                            </Typography>
+                            <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ mt: 2 }}>
+                                Вы не являетесь разработчиком. Для доступа к этой странице, пожалуйста, зарегистрируйтесь как разработчик.
+                            </Typography>
+                            <Box sx={{ mt: 3, textAlign: 'center' }}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => navigate('/')}
+                                    sx={{ mx: 1 }}
+                                >
+                                    Вернуться на главную
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => navigate('/profile')}
+                                    sx={{ mx: 1 }}
+                                >
+                                    Профиль
+                                </Button>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Container>
+            </Layout>
+        );
+    }
 
     return (
         <Layout pagename="Добавить новый товар">

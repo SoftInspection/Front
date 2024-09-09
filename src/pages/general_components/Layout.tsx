@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SaveIcon from '@mui/icons-material/Save';
 import SchoolIcon from '@mui/icons-material/School';
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -135,7 +136,10 @@ const Layout: React.FC<LayoutProps> = ({ pagename, children }) => {
                             {[
                                 { text: "Главная", link: "/", icon: <HomeIcon /> },
                                 { text: 'Профиль', link: '/profile', icon: <AccountCircle /> },
-                                { text: 'История тран-ций', link: '/transactions', icon: <AccountBalanceIcon /> }
+                                { text: 'История тран-ций', link: '/transactions', icon: <AccountBalanceIcon /> },
+                                ...(localStorage.getItem('isDeveloperMode') === 'true'
+                                    ? [{ text: 'Добавить свой', link: '/add-product', icon: <AddCircleIcon /> }]
+                                    : []),
                             ].map((item) => (
                                 <ListItem key={item.text} disablePadding>
                                     <ListItemButton component={Link} to={item.link} sx={{ '&:hover': { backgroundColor: '#424242' } }}>
