@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Paper, Button, Container, TextField, Typography, Stepper, Step, StepLabel } from '@mui/material';
+import { Box, Paper, Button, Container, TextField, Typography, Stepper, Step, StepLabel, FormControlLabel, Checkbox } from '@mui/material';
 import { Link } from "react-router-dom";
 import Layout from './general_components/Layout';
 
@@ -12,8 +12,9 @@ const Profile: React.FC = () => {
     const [balance, setBalance] = useState<number>(0);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [isPasswordRelevant, setIsPasswordRelevant] = useState<boolean>(true);
+    const [isDeveloperMode, setIsDeveloperMode] = useState<boolean>(false); // New state for developer mode
 
-    const steps = ['Введите электронную почту', 'Создайте логин и пароль'];
+    const steps = ['Введите электронную почту', 'Создайте логин и пароль', 'Доп. секция'];
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -39,12 +40,15 @@ const Profile: React.FC = () => {
             if (!isLoggedIn) {
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('username', username);
+                localStorage.setItem('isDeveloperMode', isDeveloperMode ? 'true' : 'false');
             } else {
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('username');
+                localStorage.removeItem('isDeveloperMode');
             }
         } else {
             setIsPasswordRelevant(false);
+            setActiveStep(1);
         }
     };
 
@@ -62,6 +66,7 @@ const Profile: React.FC = () => {
         localStorage.removeItem('email');
         localStorage.removeItem('balance');
         localStorage.removeItem('isCardExists');
+        localStorage.removeItem('isDeveloperMode');
         setIsLoggedIn(false);
         setUsername('');
         setEmail('');
@@ -114,6 +119,19 @@ const Profile: React.FC = () => {
                             />
                         }
                     </>
+                );
+            case 2:
+                return (
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={isDeveloperMode}
+                                onChange={(e) => setIsDeveloperMode(e.target.checked)}
+                                color="primary"
+                            />
+                        }
+                        label="Активировать режим разработчика"
+                    />
                 );
             default:
                 return 'Неизвестный шаг';
@@ -190,7 +208,7 @@ const Profile: React.FC = () => {
                                             Статус профиля:
                                         </Typography>
                                         <Typography variant="body1">
-                                            Пользователь
+                                            {isDeveloperMode ? 'Разработчик' : 'Пользователь'}
                                         </Typography>
                                     </Box>
                                     <Box sx={{ marginY: 2 }}>

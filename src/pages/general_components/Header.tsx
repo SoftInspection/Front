@@ -14,6 +14,7 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
 
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const balanceString = localStorage.getItem('balance');
+    const isDeveloperMode = localStorage.getItem('isDeveloperMode');
     const checkedBalance = balanceString ? parseFloat(balanceString) : 0;
     const balance = checkedBalance.toFixed(2);
 
@@ -78,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
                                 <>Не авторизован</>
                             }
                         </Typography>
-                        <IconButton component={Link} to="/profile" color={isLoggedIn ? "primary" : "error"}>
+                        <IconButton component={Link} to="/profile" color={isLoggedIn ? (isDeveloperMode ? "success" : "primary") : "error"}>
                             {isLoggedIn ? <AccountCircle /> : <NoAccounts />}
                         </IconButton>
                         <IconButton component={Link} to="/saved" color="primary" sx={{ ml: 1 }}>
