@@ -67,6 +67,7 @@ const Profile: React.FC = () => {
         localStorage.removeItem('balance');
         localStorage.removeItem('isCardExists');
         localStorage.removeItem('isDeveloperMode');
+        localStorage.removeItem('myProducts');
         setIsLoggedIn(false);
         setUsername('');
         setEmail('');

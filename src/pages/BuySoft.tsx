@@ -109,6 +109,7 @@ const BuySoft: React.FC = () => {
         setSpecialKey(event.target.value);
     };
 
+    // Pasting of copied text.
     const handlePaste = () => {
         navigator.clipboard.readText().then((text) => {
             setSpecialKey(text);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Grid, Card, CardContent, CardMedia, Typography as MuiTypography, CardActionArea, Snackbar, Button, Tooltip } from '@mui/material';
 import PRODUCTS from "../external_data/Products";
@@ -21,14 +21,23 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
 
     const searchFor = location.state?.searchFor ?? "";
 
+    const [products, setProducts] = useState<Product[]>(PRODUCTS);
     const [compareProducts, setCompareProducts] = useState<Product[]>([]);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+    // Fetch products from localStorage and merge with PRODUCTS
+    useEffect(() => {
+        const localStorageProducts = localStorage.getItem('myProducts');
+        if (localStorageProducts) {
+            const parsedLocalStorageProducts: Product[] = JSON.parse(localStorageProducts);
+            setProducts([...PRODUCTS, ...parsedLocalStorageProducts]);
+        }
+    }, []);
 
     const handleCardClick = (productName: string) => {
         navigate(`/item/${productName}`);
     };
 
-    // Clicking with right button.
     const handleRightClick = (event: React.MouseEvent, product: Product) => {
         event.preventDefault();
         if (compareProducts.length < 2 && !compareProducts.some(p => p.id === product.id)) {
@@ -37,20 +46,18 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
         }
     };
 
-    // Empty the list with products to compare. 
     const handleResetComparison = () => {
         setCompareProducts([]);
         setSnackbarOpen(false);
     };
 
-    // Go to comparing component.
     const handleCompare = () => {
         if (compareProducts.length === 2) {
             navigate('/compare', { state: { products: compareProducts } });
         }
     };
 
-    const filteredProducts = PRODUCTS.filter(product => {
+    const filteredProducts = products.filter(product => {
         const inCategory = categories.size === 0 || categories.has(product.category);
         const inTags = (tags.size === 0 || product.tags?.some(tag => tags.has(tag))) ?? false;
         const inPriceRange = (priceRange[0] === null || product.price >= priceRange[0]) &&

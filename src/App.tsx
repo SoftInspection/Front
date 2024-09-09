@@ -19,6 +19,7 @@ import TransactionHistory from "./pages/TransactionHistory";
 import { SavedProductsProvider } from "./pages/context/SavedProductsContext";
 
 import './App.css';
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   //! ADMINISTRATOR STATUS.
@@ -39,6 +40,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/compare" element={<CompareProducts />} />
             <Route path="/add+new+card" element={<AddCard />} />
+            <Route path="add-product" element={<AddProduct />} />
             <Route path="/deposit" element={<TopUpBalance />} />
             <Route path="/transactions" element={<TransactionHistory /> } />
             <Route path="/item/:name" element={<ProductPage />} />
