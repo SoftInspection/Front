@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ pagename }) => {
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Typography variant="body1" sx={{ color: 'text.secondary', mr: 2 }}>
                             {isLoggedIn ?
-                                <>Баланс: <span style={{ fontWeight: 'bold', color: 'primary.main' }}>{balance ? balance : '0'}</span> токенов</> :
+                                <>Баланс: <span style={{ fontWeight: 'bold', color: '#2979ff' }}>{balance ? balance : '0'}</span> токенов</> :
                                 <>Не авторизован</>
                             }
                         </Typography>

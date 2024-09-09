@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "./general_components/Layout";
+import { Paper, Typography, Container, Box, Grid } from "@mui/material";
+import { Pie } from 'react-chartjs-2';
 
 interface CheckAPIProps {
     isAdmin: boolean;
@@ -21,7 +23,7 @@ const CheckAPI: React.FC<CheckAPIProps> = ({ isAdmin }) => {
                 }
             }
         }
-        return totalSize * 2; 
+        return totalSize * 2;
     };
 
     useEffect(() => {
@@ -29,18 +31,49 @@ const CheckAPI: React.FC<CheckAPIProps> = ({ isAdmin }) => {
         setLocalStorageSize(size);
     }, []);
 
+    const pieData = {
+        labels: ['Занято', 'Свободно'],
+        datasets: [
+            {
+                data: [localStorageSize, MAX_LOCAL_STORAGE_SIZE_BYTES - localStorageSize],
+                backgroundColor: ['#f44336', '#4caf50'],
+            },
+        ],
+    };
+
     return (
         <Layout pagename="API">
-            {
-                !isAdmin ?
-                    <p>Извините, но вы не являетесь администратором.</p> :
-                    <p>
-                        Вес localStorage: {localStorageSize} байт из {MAX_LOCAL_STORAGE_SIZE_BYTES} байт
-                        ({(localStorageSize / MAX_LOCAL_STORAGE_SIZE_BYTES * 100).toFixed(2)}% от максимального объема).
-                    </p>
-            }
+            <Container maxWidth="md">
+                {!isAdmin ? (
+                    <Typography variant="h6" color="error" align="center">
+                        Извините, но вы не являетесь администратором.
+                    </Typography>
+                ) : (
+                    <Box sx={{ mt: 4 }}>
+                        <Typography variant="h6" align="center" gutterBottom>
+                            Вес localStorage
+                        </Typography>
+                        <Typography variant="body1" align="center" sx={{ mb: 4 }}>
+                            Вес localStorage: {localStorageSize} байт из {MAX_LOCAL_STORAGE_SIZE_BYTES} байт
+                            ({(localStorageSize / MAX_LOCAL_STORAGE_SIZE_BYTES * 100).toFixed(2)}% от максимального объема).
+                        </Typography>
+                        <Grid container spacing={4} justifyContent="center">
+                            <Grid item xs={12} md={6}>
+                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <Typography variant="h6" align="center" sx={{ mb: 2 }}>
+                                        Распределение по типам
+                                    </Typography>
+                                    <div style={{ width: '100%', height: '300px' }}>
+                                        <Pie data={pieData} />
+                                    </div>
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                )}
+            </Container>
         </Layout>
     );
-}
+};
 
 export default CheckAPI;
