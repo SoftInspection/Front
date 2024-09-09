@@ -113,4 +113,14 @@ const PRODUCTS: Product[] = [
     }
 ];
 
-export default PRODUCTS;
+const loadProductsFromLocalStorage = (): Product[] => {
+    const storedProducts = localStorage.getItem('myProducts');
+    if (storedProducts) {
+        return JSON.parse(storedProducts);
+    }
+    return [];
+};
+
+const allProducts: Product[] = [...PRODUCTS, ...loadProductsFromLocalStorage()];
+
+export default allProducts;

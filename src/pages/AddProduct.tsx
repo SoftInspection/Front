@@ -37,7 +37,7 @@ const AddProduct: React.FC = () => {
         const storedProducts = localStorage.getItem('myProducts');
         if (storedProducts) {
             const parsedProducts = JSON.parse(storedProducts);
-            PRODUCTS.push(...parsedProducts);
+            // PRODUCTS.push(...parsedProducts);
         }
     }, []);
 

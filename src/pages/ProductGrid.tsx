@@ -25,15 +25,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
     const [compareProducts, setCompareProducts] = useState<Product[]>([]);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-    // Fetch products from localStorage and merge with PRODUCTS
-    useEffect(() => {
-        const localStorageProducts = localStorage.getItem('myProducts');
-        if (localStorageProducts) {
-            const parsedLocalStorageProducts: Product[] = JSON.parse(localStorageProducts);
-            setProducts([...PRODUCTS, ...parsedLocalStorageProducts]);
-        }
-    }, []);
-
     const handleCardClick = (productName: string) => {
         navigate(`/item/${productName}`);
     };
