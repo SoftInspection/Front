@@ -71,7 +71,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
                 {filteredProducts.map((product: Product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                         <Tooltip
-                            title={`Нажмите ЛКМ, чтобы перейти к данным о ${product.name}. \n Нажмите ПКМ, чтобы добавить товар в сравнение.`}
+                            title={`Нажмите ЛКМ, чтобы перейти к данным о ${product.name}. \n Нажмите ПКМ, чтобы добавить товар в сравнение. Нажмите на КМ (колёсико мыши), чтобы непосредственно перейти к покупке.`}
                             placement="top-start"
                             arrow
                         >
@@ -79,6 +79,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
                                 <CardActionArea
                                     onClick={() => handleCardClick(product.name)}
                                     onContextMenu={(event) => handleRightClick(event, product)}
+                                    onMouseDown={(event) => {
+                                        if (event.button === 1) {
+                                            navigate(`/buy/${product.name}`)
+                                        }
+                                    }}
                                 >
                                     <Card>
                                         <CardMedia

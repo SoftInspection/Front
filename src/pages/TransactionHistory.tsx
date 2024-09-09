@@ -33,7 +33,7 @@ const TransactionHistory: React.FC = () => {
         labels: ['Deposits', 'Expenses'],
         datasets: [
             {
-                data: [deposits.reduce((sum, t) => sum + t.amount, 0), expenses.reduce((sum, t) => sum + t.amount, 0)],
+                data: [(deposits.reduce((sum, t) => sum + t.amount, 0) / 2), expenses.reduce((sum, t) => sum + t.amount, 0)],
                 backgroundColor: ['#4caf50', '#f44336'],
             },
         ],
