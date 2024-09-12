@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Paper, Button, Container, TextField, Typography, Stepper, Step, StepLabel, FormControlLabel, Checkbox } from '@mui/material';
 import { Link } from "react-router-dom";
 import Layout from './general_components/Layout';
+import AddedProducts from './Dev_Mode_Additional/AddedProducts';
 
 const Profile: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -249,6 +250,8 @@ const Profile: React.FC = () => {
                         </Container>
                     </Container>
                 )}
+                <hr />
+                <AddedProducts />
         </Layout>
     );
 };
