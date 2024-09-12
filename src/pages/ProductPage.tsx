@@ -127,8 +127,8 @@ const ProductPage: React.FC = () => {
                         <MuiTypography variant="h3" gutterBottom style={{ fontWeight: 'bold' }}>
                             {product.name}
                         </MuiTypography>
-                        <MuiTypography variant="h5" color="textSecondary" gutterBottom>
-                            {product.price}
+                        <MuiTypography variant="h5" color={product.price ? "textSecondary" : "lime"} gutterBottom>
+                            {product.price === 0 ? 'БЕСПЛАТНО' : product.price}
                         </MuiTypography>
                         <MuiTypography variant="body1" gutterBottom>
                             {product.description}

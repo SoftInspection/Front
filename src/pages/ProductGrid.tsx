@@ -97,8 +97,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categories, tags, priceRange,
                                             <MuiTypography variant="body2" color="text.secondary">
                                                 {truncateDescription(product.description, 20)}
                                             </MuiTypography>
-                                            <MuiTypography variant="body2" color="text.primary">
-                                                Цена: ${product.price}
+                                            <MuiTypography variant="body2" color={(product.price === 0) ? "success.main" : "text.primary"}>
+                                                {product.price ? `Цена: ${product.price}` : `Бесплатно`}
                                             </MuiTypography>
                                             <MuiTypography variant="body2" color="text.secondary">
                                                 Категория: {product.category}

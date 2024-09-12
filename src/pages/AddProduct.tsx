@@ -87,8 +87,10 @@ const AddProduct: React.FC = () => {
     // Computing the price.
     useEffect(() => {
         const calculateFinalPrice = () => {
-            const commission = product.price * 0.02 + 0.01; // 2% & 0.01 token of comission
-            setFinalPrice(product.price - commission);
+            if (product.price !== 0) {
+                const commission = product.price * 0.02 + 0.01; // 2% & 0.01 token of comission
+                setFinalPrice(product.price - commission);
+            }
         };
         calculateFinalPrice();
     }, [product.price]);

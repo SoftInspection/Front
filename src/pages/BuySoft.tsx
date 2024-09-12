@@ -21,7 +21,7 @@ const BuySoft: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(product?.price ? 0 : 2);
     const [specialKey, setSpecialKey] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [purchaseComplete, setPurchaseComplete] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Grid, Card, CardContent, Typography, Chip, CardActionArea } from '@mui/material';
 import Product from '../general_components/Product';
 
@@ -20,12 +20,17 @@ const AddedProducts: React.FC = () => {
       <Typography variant="h6" gutterBottom>
         Проектов создано: {products.length}
       </Typography>
+      {products.length ? undefined :
+        <Link to={('/add-product')}>
+          <Typography variant="h6" color="text.secondary">Создать первый проект!</Typography>
+        </Link>
+      }
 
       <Grid container spacing={2}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Card>
-              <CardActionArea onClick={ () => navigate(`/item/${product.name}`) }>
+              <CardActionArea onClick={() => navigate(`/item/${product.name}`)}>
                 <CardContent>
                   <Typography variant="h5" component="div">
                     {product.name}

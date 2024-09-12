@@ -250,8 +250,11 @@ const Profile: React.FC = () => {
                         </Container>
                     </Container>
                 )}
-                <hr />
-                <AddedProducts />
+            {isDeveloperMode ?
+                <React.Fragment>
+                    <AddedProducts />
+                </React.Fragment>
+                : undefined}
         </Layout>
     );
 };
