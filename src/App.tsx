@@ -15,11 +15,11 @@ import CompareProducts from "./pages/CompareProducts";
 import BuySoft from "./pages/BuySoft";
 import TopUpBalance from "./pages/Bank/TopUpBalance";
 import TransactionHistory from "./pages/TransactionHistory";
+import AddProduct from "./pages/AddProduct";
 
 import { SavedProductsProvider } from "./pages/context/SavedProductsContext";
 
 import './App.css';
-import AddProduct from "./pages/AddProduct";
 
 function App() {
   //! ADMINISTRATOR STATUS.
